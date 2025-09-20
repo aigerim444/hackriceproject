@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { reportAPI } from '../services/api';
+import BottomNavigation from '../components/BottomNavigation';
+import '../styles/Profile.css';
 import '../styles/Profile.css';
 
 interface DailyReport {
@@ -362,6 +364,7 @@ const Profile: React.FC = () => {
           </div>
         )}
       </div>
+      <BottomNavigation />
     </div>
   );
 };

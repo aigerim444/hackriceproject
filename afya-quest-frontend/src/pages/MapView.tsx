@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useNavigate } from 'react-router-dom';
+import BottomNavigation from '../components/BottomNavigation';
+import '../styles/MapView.css';
 import '../styles/MapView.css';
 
 // Fix for default markers in react-leaflet
@@ -23,18 +24,24 @@ interface HealthFacility {
   distance?: number;
 }
 
-interface CHALocation {
+interface ClientHouse {
   id: string;
-  name: string;
+  address: string;
+  clientName: string;
   position: [number, number];
-  status: 'active' | 'inactive';
+  status: 'to-visit' | 'visited' | 'scheduled';
   lastVisit?: string;
+  nextVisit?: string;
+  distance?: number;
+  description?: string;
 }
 
 const MapView: React.FC = () => {
   const navigate = useNavigate();
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-  const [selectedView, setSelectedView] = useState<'facilities' | 'chas'>('facilities');
+  const [selectedView, setSelectedView] = useState<'facilities' | 'clients'>('facilities');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [statusFilter, setStatusFilter] = useState<'all' | 'to-visit' | 'visited' | 'scheduled'>('all');
   
   // Default to Kajiado Town coordinates
   const defaultPosition: [number, number] = [-1.8527, 36.7816];
@@ -106,48 +113,83 @@ const MapView: React.FC = () => {
     }
   ];
 
-  const chaLocations: CHALocation[] = [
+  const clientHouses: ClientHouse[] = [
     {
       id: '1',
-      name: 'Mary Nkoyiai',
+      address: '123 Savannah Road',
+      clientName: 'Amboseli Village, Kajiado County, Kenya',
       position: [-1.8567, 36.7823],
-      status: 'active',
-      lastVisit: '2 hours ago'
+      status: 'to-visit',
+      distance: 1.2,
+      description: 'Maternal health check-up needed'
     },
     {
       id: '2',
-      name: 'Joseph Ole Sankale',
+      address: '45 Elephant Trail',
+      clientName: 'Oloitokitok, Kajiado County, Kenya', 
       position: [-1.8491, 36.7798],
-      status: 'active',
-      lastVisit: '30 minutes ago'
+      status: 'to-visit',
+      distance: 1.9,
+      description: 'Child vaccination due'
     },
     {
       id: '3',
-      name: 'Grace Nasieku',
+      address: '78 Acacia Drive',
+      clientName: 'Grace Nasieku',
       position: [-1.8753, 36.8201],
-      status: 'active',
-      lastVisit: '1 hour ago'
+      status: 'visited',
+      lastVisit: '2 days ago',
+      distance: 2.3,
+      description: 'Follow-up completed'
     },
     {
       id: '4',
-      name: 'David Lekishon',
+      address: '22 Baobab Street',
+      clientName: 'David Lekishon Family',
       position: [-1.8612, 36.7756],
-      status: 'inactive',
-      lastVisit: 'Yesterday'
+      status: 'scheduled',
+      nextVisit: 'Tomorrow 10:00 AM',
+      distance: 0.8,
+      description: 'Family planning consultation'
     },
     {
       id: '5',
-      name: 'Sarah Entito',
+      address: '56 Mara Road',
+      clientName: 'Sarah Entito',
       position: [-1.4798, 36.9523],
-      status: 'active',
-      lastVisit: '3 hours ago'
+      status: 'visited',
+      lastVisit: '1 week ago',
+      distance: 42.1,
+      description: 'Diabetes monitoring completed'
     },
     {
       id: '6',
-      name: 'Peter Kisemei',
+      address: '89 Kilimanjaro View',
+      clientName: 'Peter Kisemei Household',
       position: [-2.5512, 36.7856],
-      status: 'active',
-      lastVisit: '4 hours ago'
+      status: 'to-visit',
+      distance: 77.2,
+      description: 'Hypertension screening needed'
+    },
+    {
+      id: '7',
+      address: '34 Simba Lane',
+      clientName: 'Mary Ole Sankale',
+      position: [-1.8523, 36.7665],
+      status: 'scheduled',
+      nextVisit: 'Friday 2:00 PM',
+      distance: 1.1,
+      description: 'Prenatal care appointment'
+    },
+    {
+      id: '8',
+      address: '67 Zebra Close',
+      clientName: 'Joseph Mutua Family',
+      position: [-1.8734, 36.8123],
+      status: 'visited',
+      lastVisit: '3 days ago',
+      distance: 3.2,
+      description: 'Health education session completed'
     }
   ];
 
@@ -177,45 +219,73 @@ const MapView: React.FC = () => {
     });
   };
 
-  const getCHAIcon = (status: string) => {
-    const color = status === 'active' ? '#4CAF50' : '#9E9E9E';
+  const getClientIcon = (status: string) => {
+    let color = '#F44336'; // Red for to-visit
+    if (status === 'visited') color = '#4CAF50'; // Green for visited
+    if (status === 'scheduled') color = '#2196F3'; // Blue for scheduled
+    
     return L.divIcon({
-      html: `<div style="background-color: ${color}; width: 12px; height: 12px; border-radius: 50%; border: 2px solid white;"></div>`,
-      iconSize: [16, 16],
-      className: 'cha-marker'
+      html: `<div style="background-color: ${color}; width: 16px; height: 16px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.3);"></div>`,
+      iconSize: [20, 20],
+      className: 'client-marker'
     });
   };
+
+  const filteredClients = clientHouses.filter(client => {
+    const matchesSearch = client.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                         client.clientName.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || client.status === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
 
   const mapCenter = userLocation || defaultPosition;
 
   return (
     <div className="map-view">
-      <header className="map-header">
-        <button className="back-btn" onClick={() => navigate('/dashboard')}>
-          ←
-        </button>
-        <h1>Map-Based UI</h1>
-        <div className="view-toggle">
-          <button
-            className={selectedView === 'facilities' ? 'active' : ''}
-            onClick={() => setSelectedView('facilities')}
-          >
-            Facilities
-          </button>
-          <button
-            className={selectedView === 'chas' ? 'active' : ''}
-            onClick={() => setSelectedView('chas')}
-          >
-            CHAs
-          </button>
+      {/* Search Bar */}
+      <div className="search-container">
+        <div className="search-input-wrapper">
+          <span className="search-icon">🔍</span>
+          <input
+            type="text"
+            placeholder="Find CHC Locations"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="search-input"
+          />
         </div>
-      </header>
+      </div>
+
+      {/* Filter Buttons */}
+      <div className="filter-buttons">
+        <button
+          className={`filter-btn ${statusFilter === 'to-visit' ? 'active' : ''}`}
+          onClick={() => setStatusFilter('to-visit')}
+        >
+          <span className="bell-icon">🔔</span>
+          To Visit
+        </button>
+        <button
+          className={`filter-btn ${statusFilter === 'visited' ? 'active' : ''}`}
+          onClick={() => setStatusFilter('visited')}
+        >
+          <span className="check-icon">✓</span>
+          Visited
+        </button>
+        <button
+          className={`filter-btn ${statusFilter === 'scheduled' ? 'active' : ''}`}
+          onClick={() => setStatusFilter('scheduled')}
+        >
+          <span className="calendar-icon">📅</span>
+          Scheduled
+        </button>
+      </div>
 
       <div className="map-container">
         <MapContainer
           center={mapCenter}
           zoom={13}
-          style={{ height: '400px', width: '100%' }}
+          style={{ height: '500px', width: '100%' }}
         >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -238,10 +308,10 @@ const MapView: React.FC = () => {
             </>
           )}
           
-          {/* Health Facilities */}
-          {selectedView === 'facilities' && healthFacilities.map(facility => (
+          {/* Health Facilities - Always Show */}
+          {healthFacilities.map(facility => (
             <Marker
-              key={facility.id}
+              key={`facility-${facility.id}`}
               position={facility.position}
               icon={getMarkerIcon(facility.type)}
             >
@@ -263,86 +333,89 @@ const MapView: React.FC = () => {
             </Marker>
           ))}
           
-          {/* CHA Locations */}
-          {selectedView === 'chas' && chaLocations.map(cha => (
+          {/* Client Houses */}
+          {filteredClients.map(client => (
             <Marker
-              key={cha.id}
-              position={cha.position}
-              icon={getCHAIcon(cha.status)}
+              key={client.id}
+              position={client.position}
+              icon={getClientIcon(client.status)}
             >
               <Popup>
-                <div className="cha-popup">
-                  <h4>{cha.name}</h4>
-                  <p>Status: <span className={cha.status}>{cha.status}</span></p>
-                  <p>Last Visit: {cha.lastVisit}</p>
+                <div className="client-popup">
+                  <h4>{client.address}</h4>
+                  <p><strong>{client.clientName}</strong></p>
+                  <p>Status: <span className={`status-${client.status}`}>{client.status.replace('-', ' ').toUpperCase()}</span></p>
+                  <p>Distance: {client.distance} miles</p>
+                  {client.lastVisit && <p>Last Visit: {client.lastVisit}</p>}
+                  {client.nextVisit && <p>Next Visit: {client.nextVisit}</p>}
+                  {client.description && <p>Note: {client.description}</p>}
                 </div>
               </Popup>
             </Marker>
           ))}
         </MapContainer>
+        
+        {/* Map Controls */}
+        <div className="map-controls">
+          <button className="control-btn layers-btn">📐</button>
+          <button className="control-btn location-btn">📍</button>
+        </div>
       </div>
 
+      {/* Map Legend */}
       <div className="map-legend">
-        <h3>Legend</h3>
-        {selectedView === 'facilities' ? (
-          <div className="legend-items">
-            <div className="legend-item">
-              <span>🏥</span> Hospital
-            </div>
-            <div className="legend-item">
-              <span>🏩</span> Clinic
-            </div>
-            <div className="legend-item">
-              <span>🏨</span> Health Center
-            </div>
-            <div className="legend-item">
-              <span style={{ color: 'blue' }}>●</span> Your Location
-            </div>
-          </div>
-        ) : (
-          <div className="legend-items">
-            <div className="legend-item">
-              <span style={{ color: '#4CAF50' }}>●</span> Active CHA
-            </div>
-            <div className="legend-item">
-              <span style={{ color: '#9E9E9E' }}>●</span> Inactive CHA
+        <h3>Map Legend</h3>
+        <div className="legend-sections">
+          <div className="legend-section">
+            <h4>Health Facilities</h4>
+            <div className="legend-items">
+              <div className="legend-item">
+                <span>🏥</span> Hospital
+              </div>
+              <div className="legend-item">
+                <span>🏩</span> Clinic
+              </div>
+              <div className="legend-item">
+                <span>🏨</span> Health Center
+              </div>
             </div>
           </div>
-        )}
+          <div className="legend-section">
+            <h4>Client Visits</h4>
+            <div className="legend-items">
+              <div className="legend-item">
+                <span className="legend-dot red"></span> To Visit
+              </div>
+              <div className="legend-item">
+                <span className="legend-dot blue"></span> Scheduled
+              </div>
+              <div className="legend-item">
+                <span className="legend-dot green"></span> Visited
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div className="location-stats">
-        <h3>Location Statistics</h3>
-        {selectedView === 'facilities' ? (
-          <div className="stats-grid">
-            <div className="stat-card">
-              <span className="stat-value">{healthFacilities.length}</span>
-              <span className="stat-label">Nearby Facilities</span>
+      {/* Client List */}
+      <div className="client-list">
+        {filteredClients.slice(0, 2).map(client => (
+          <div key={client.id} className="client-item">
+            <div className="client-icon">
+              <span className={`status-dot status-${client.status}`}></span>
             </div>
-            <div className="stat-card">
-              <span className="stat-value">3.7 km</span>
-              <span className="stat-label">Avg. Distance</span>
+            <div className="client-info">
+              <h4>{client.address}</h4>
+              <p>{client.clientName}</p>
             </div>
-          </div>
-        ) : (
-          <div className="stats-grid">
-            <div className="stat-card">
-              <span className="stat-value">{chaLocations.filter(c => c.status === 'active').length}</span>
-              <span className="stat-label">Active CHAs</span>
-            </div>
-            <div className="stat-card">
-              <span className="stat-value">{chaLocations.length}</span>
-              <span className="stat-label">Total CHAs</span>
+            <div className="client-distance">
+              <span className="distance-icon">📍</span>
+              <span className="distance-text">{client.distance} miles</span>
             </div>
           </div>
-        )}
+        ))}
       </div>
-
-      <div className="navigation-info">
-        <h3>Quick Navigation</h3>
-        <p>Tap on any marker to view details and get directions.</p>
-        <p>Use the Kajiado County navigation for easier access to nearby facilities.</p>
-      </div>
+      <BottomNavigation />
     </div>
   );
 };
