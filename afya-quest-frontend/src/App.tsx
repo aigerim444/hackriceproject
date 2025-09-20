@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import InteractiveLearning from './pages/InteractiveLearning';
-import VideoModules from './pages/VideoModules';
-import DailyQuestions from './pages/DailyQuestions';
-import MapView from './pages/MapView';
 import Login from './pages/Login';
-import Profile from './pages/Profile';
+import Dashboard from './pages/Dashboard';
+import DailyQuestions from './pages/DailyQuestions';
 import DailyReport from './pages/DailyReport';
 import Itinerary from './pages/Itinerary';
+import InteractiveLearning from './pages/InteractiveLearning';
+import VideoModules from './pages/VideoModules';
+import Profile from './pages/Profile';
+import MapView from './pages/MapView';
+import { initializeLivesIfNeeded } from './utils/xpManager';
 import './styles/App.css';
 
 function App() {
+  useEffect(() => {
+    // Initialize lives on app start if needed
+    initializeLivesIfNeeded();
+  }, []);
+  
   return (
     <Router>
       <div className="App">

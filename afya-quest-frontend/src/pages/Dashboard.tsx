@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getTotalXP, getStreak, getLives, initializeLivesIfNeeded } from '../utils/xpManager';
 import '../styles/Dashboard.css';
 
 interface DailyTask {
@@ -14,9 +15,42 @@ interface DailyTask {
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const [streakCount, setStreakCount] = useState(3);
-  const [xpPoints, setXpPoints] = useState(1432);
-  const [lives, setLives] = useState(Infinity);
+  const [streakCount, setStreakCount] = useState(getStreak());
+  const [xpPoints, setXpPoints] = useState(getTotalXP());
+  const [lives, setLives] = useState(getLives());
+  
+  useEffect(() => {
+    // Initialize lives if needed
+    initializeLivesIfNeeded();
+    
+    // Update XP, streak and lives from localStorage
+    const updateStats = () => {
+      setXpPoints(getTotalXP());
+      setStreakCount(getStreak());
+      setLives(getLives());
+    };
+    
+    // Initial update
+    updateStats();
+    
+    // Listen for XP updates
+    const handleXPUpdate = (event: CustomEvent) => {
+      const data = event.detail;
+      setXpPoints(data.totalXP);
+      setStreakCount(data.streak);
+      setLives(data.lives);
+    };
+    
+    window.addEventListener('xpUpdated', handleXPUpdate as EventListener);
+    
+    // Update on focus (when user returns to tab)
+    window.addEventListener('focus', updateStats);
+    
+    return () => {
+      window.removeEventListener('xpUpdated', handleXPUpdate as EventListener);
+      window.removeEventListener('focus', updateStats);
+    };
+  }, []);
 
   const dailyTasks: DailyTask[] = [
     {
@@ -72,7 +106,7 @@ const Dashboard: React.FC = () => {
         </div>
         <div className="stat-item">
           <span className="stat-icon">❤️</span>
-          <span className="stat-value">{lives === Infinity ? '∞' : lives}</span>
+          <span className="stat-value">{lives}</span>
         </div>
       </header>
 

@@ -5,12 +5,31 @@
   padding-bottom: 2rem;
 }
 
+.header-stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .score-display {
   background: var(--success-color);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.lives-display {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* Question Progress */
@@ -227,6 +246,36 @@
 .day.completed {
   background: var(--success-color);
   color: white;
+}
+
+/* Quiz Summary */
+.quiz-summary {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.quiz-summary h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.2rem;
+}
+
+.quiz-summary p {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.quiz-summary p:last-child {
+  font-weight: bold;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #E0E0E0;
 }
 
 /* Mobile Responsive */

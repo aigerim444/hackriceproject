@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { reportAPI } from '../services/api';
+import { addXP, XP_REWARDS } from '../utils/xpManager';
 import '../styles/DailyReport.css';
 
 interface ReportField {
@@ -49,7 +50,9 @@ const DailyReport: React.FC = () => {
       await reportAPI.createReport(reportToSubmit);
       
       console.log('Report submitted successfully:', reportToSubmit);
-      alert('Report submitted successfully! +50 XP earned!');
+      
+      // Add XP for submitting report
+      addXP(XP_REWARDS.DAILY_REPORT, 'Submitted daily report');
       
       // Store in localStorage as backup
       const existingReports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
@@ -76,7 +79,8 @@ const DailyReport: React.FC = () => {
       existingReports.push(reportToSubmit);
       localStorage.setItem('dailyReports', JSON.stringify(existingReports));
       
-      alert('Report saved locally. It will be synced when connection is restored.');
+      // Still add XP even if backend fails
+      addXP(XP_REWARDS.DAILY_REPORT, 'Submitted daily report (saved locally)');
       navigate('/dashboard');
     }
   };

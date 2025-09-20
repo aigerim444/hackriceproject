@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addXP, XP_REWARDS, getStreak, addLives, removeLives, getLives } from '../utils/xpManager';
 import '../styles/DailyQuestions.css';
 
 interface Question {
@@ -20,6 +21,8 @@ const DailyQuestions: React.FC = () => {
   const [showExplanation, setShowExplanation] = useState(false);
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState<Set<string>>(new Set());
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [currentLives, setCurrentLives] = useState(getLives());
 
   const dailyQuestions: Question[] = [
     {
@@ -80,6 +83,16 @@ const DailyQuestions: React.FC = () => {
     
     if (answerIndex === currentQuestion.correctAnswer) {
       setScore(score + currentQuestion.points);
+      setCorrectAnswers(correctAnswers + 1);
+      // Add XP for correct answer
+      addXP(XP_REWARDS.DAILY_QUESTION_CORRECT, `Correct answer: ${currentQuestion.question.substring(0, 50)}...`);
+      // Add 2 lives for correct answer
+      const newLives = addLives(2, 'Correct answer!');
+      setCurrentLives(newLives);
+    } else {
+      // Remove 1 life for wrong answer
+      const newLives = removeLives(1, 'Wrong answer');
+      setCurrentLives(newLives);
     }
     
     setAnsweredQuestions(new Set([...answeredQuestions, currentQuestion.id]));
@@ -94,6 +107,10 @@ const DailyQuestions: React.FC = () => {
   };
 
   const handleFinish = () => {
+    // Add bonus XP for completing all questions
+    if (answeredQuestions.size === dailyQuestions.length) {
+      addXP(XP_REWARDS.DAILY_QUESTION_BONUS, 'Completed all daily questions!');
+    }
     navigate('/dashboard');
   };
 
@@ -113,8 +130,13 @@ const DailyQuestions: React.FC = () => {
           ←
         </button>
         <h1>Daily Questions</h1>
-        <div className="score-display">
-          Score: {score}
+        <div className="header-stats">
+          <div className="score-display">
+            💯 Score: {score}
+          </div>
+          <div className="lives-display">
+            ❤️ Lives: {currentLives}
+          </div>
         </div>
       </header>
 
@@ -203,15 +225,24 @@ const DailyQuestions: React.FC = () => {
       </div>
 
       <div className="daily-streak">
-        <h3>🔥 Daily Streak: 7 days</h3>
+        <h3>🔥 Daily Streak: {getStreak()} days</h3>
         <p>Keep answering daily questions to maintain your streak!</p>
         <div className="streak-calendar">
           {[...Array(7)].map((_, i) => (
-            <div key={i} className={`day ${i < 7 ? 'completed' : ''}`}>
-              {i < 7 ? '✓' : ''}
+            <div key={i} className={`day ${i < getStreak() ? 'completed' : ''}`}>
+              {i < getStreak() ? '✓' : ''}
             </div>
           ))}
         </div>
+        {showExplanation && isLastQuestion && (
+          <div className="quiz-summary">
+            <h4>Quiz Complete!</h4>
+            <p>You got {correctAnswers} out of {dailyQuestions.length} questions correct!</p>
+            <p>Total XP earned: {correctAnswers * XP_REWARDS.DAILY_QUESTION_CORRECT + (answeredQuestions.size === dailyQuestions.length ? XP_REWARDS.DAILY_QUESTION_BONUS : 0)} XP</p>
+            <p>Lives gained: {correctAnswers * 2} ❤️ | Lives lost: {(dailyQuestions.length - correctAnswers)} 💔</p>
+            <p>Current Lives: {currentLives}</p>
+          </div>
+        )}
       </div>
     </div>
   );
