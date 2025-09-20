@@ -36,57 +36,118 @@ const MapView: React.FC = () => {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [selectedView, setSelectedView] = useState<'facilities' | 'chas'>('facilities');
   
-  // Default to Nairobi coordinates
-  const defaultPosition: [number, number] = [-1.286389, 36.817223];
+  // Default to Kajiado Town coordinates
+  const defaultPosition: [number, number] = [-1.8527, 36.7816];
   
   const healthFacilities: HealthFacility[] = [
     {
       id: '1',
-      name: 'Kenyatta National Hospital',
+      name: 'Kajiado County Referral Hospital',
       type: 'hospital',
-      position: [-1.3018, 36.8065],
-      servicesAvailable: ['Emergency', 'Maternity', 'Pediatrics', 'Surgery'],
-      distance: 5.2
+      position: [-1.8523, 36.7765],
+      servicesAvailable: ['Emergency', 'Maternity', 'Pediatrics', 'Surgery', 'Outpatient', 'Laboratory'],
+      distance: 0.5
     },
     {
       id: '2',
-      name: 'Kibera Health Center',
-      type: 'health-center',
-      position: [-1.3125, 36.7880],
-      servicesAvailable: ['Vaccination', 'Maternal Care', 'Outpatient'],
-      distance: 3.1
+      name: 'Ongata Rongai Sub-County Hospital',
+      type: 'hospital',
+      position: [-1.3956, 36.7412],
+      servicesAvailable: ['Emergency', 'Maternity', 'Pediatrics', 'Outpatient', 'X-Ray'],
+      distance: 52.3
     },
     {
       id: '3',
-      name: 'Mathare North Health Centre',
+      name: 'Ngong Sub-County Hospital',
+      type: 'hospital',
+      position: [-1.3535, 36.6639],
+      servicesAvailable: ['Emergency', 'Maternity', 'Surgery', 'Laboratory', 'Pharmacy'],
+      distance: 58.7
+    },
+    {
+      id: '4',
+      name: 'Kitengela Health Center',
+      type: 'health-center',
+      position: [-1.4744, 36.9556],
+      servicesAvailable: ['Vaccination', 'Maternal Care', 'Outpatient', 'Family Planning'],
+      distance: 42.1
+    },
+    {
+      id: '5',
+      name: 'Namanga Health Center',
+      type: 'health-center',
+      position: [-2.5466, 36.7827],
+      servicesAvailable: ['Primary Care', 'Vaccination', 'Maternal Health', 'HIV Testing'],
+      distance: 77.2
+    },
+    {
+      id: '6',
+      name: 'Bissil Health Center',
       type: 'clinic',
-      position: [-1.2621, 36.8580],
+      position: [-1.8774, 36.8229],
       servicesAvailable: ['Primary Care', 'Vaccination', 'Family Planning'],
-      distance: 7.8
+      distance: 5.8
+    },
+    {
+      id: '7',
+      name: 'Oloitokitok Sub-County Hospital',
+      type: 'hospital',
+      position: [-2.9561, 37.5269],
+      servicesAvailable: ['Emergency', 'Maternity', 'Outpatient', 'Laboratory'],
+      distance: 142.5
+    },
+    {
+      id: '8',
+      name: 'Kimana Health Center',
+      type: 'clinic',
+      position: [-2.7528, 37.4625],
+      servicesAvailable: ['Primary Care', 'Maternal Health', 'Vaccination'],
+      distance: 120.3
     }
   ];
 
   const chaLocations: CHALocation[] = [
     {
       id: '1',
-      name: 'Mary Wanjiru',
-      position: [-1.2921, 36.8219],
+      name: 'Mary Nkoyiai',
+      position: [-1.8567, 36.7823],
       status: 'active',
       lastVisit: '2 hours ago'
     },
     {
       id: '2',
-      name: 'John Kamau',
-      position: [-1.3031, 36.8156],
+      name: 'Joseph Ole Sankale',
+      position: [-1.8491, 36.7798],
       status: 'active',
       lastVisit: '30 minutes ago'
     },
     {
       id: '3',
-      name: 'Grace Achieng',
-      position: [-1.2750, 36.8300],
+      name: 'Grace Nasieku',
+      position: [-1.8753, 36.8201],
+      status: 'active',
+      lastVisit: '1 hour ago'
+    },
+    {
+      id: '4',
+      name: 'David Lekishon',
+      position: [-1.8612, 36.7756],
       status: 'inactive',
       lastVisit: 'Yesterday'
+    },
+    {
+      id: '5',
+      name: 'Sarah Entito',
+      position: [-1.4798, 36.9523],
+      status: 'active',
+      lastVisit: '3 hours ago'
+    },
+    {
+      id: '6',
+      name: 'Peter Kisemei',
+      position: [-2.5512, 36.7856],
+      status: 'active',
+      lastVisit: '4 hours ago'
     }
   ];
 
@@ -280,7 +341,7 @@ const MapView: React.FC = () => {
       <div className="navigation-info">
         <h3>Quick Navigation</h3>
         <p>Tap on any marker to view details and get directions.</p>
-        <p>Use the Kabale region navigation for easier access to nearby facilities.</p>
+        <p>Use the Kajiado County navigation for easier access to nearby facilities.</p>
       </div>
     </div>
   );

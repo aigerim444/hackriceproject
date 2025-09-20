@@ -78,4 +78,22 @@ export const progressAPI = {
     api.get('/progress'),
 };
 
+// Daily Report endpoints
+export const reportAPI = {
+  createReport: (reportData: any) => 
+    api.post('/reports', reportData),
+  
+  getAllReports: () => 
+    api.get('/reports'),
+  
+  getReportById: (id: string) => 
+    api.get(`/reports/${id}`),
+  
+  deleteReport: (id: string) => 
+    api.delete(`/reports/${id}`),
+  
+  updateReport: (id: string, reportData: any) => 
+    api.put(`/reports/${id}`, reportData),
+};
+
 export default api;

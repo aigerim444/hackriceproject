@@ -1,22 +1,101 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { reportAPI } from '../services/api';
 import '../styles/Profile.css';
+
+interface DailyReport {
+  id: string;
+  date: string;
+  patientsVisited: number;
+  vaccinationsGiven: number;
+  healthEducation: string;
+  challenges?: string;
+  notes?: string;
+}
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'achievements' | 'settings'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'achievements' | 'reports' | 'settings'>('overview');
+  const [pastReports, setPastReports] = useState<DailyReport[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const userInfo = {
-    name: 'Mary Wanjiku',
+    name: 'Steve Zhang',
     role: 'Community Health Assistant',
-    email: 'mary.wanjiku@afyaquest.com',
+    email: 'steve.zhang@afyaquest.com',
     phone: '+254 712 345 678',
-    location: 'Kibera, Nairobi',
+    location: 'Kajiado Town, Kajiado',
     joinDate: 'January 2024',
     supervisor: 'Dr. John Kamau',
     level: 5,
     totalPoints: 1250,
     rank: 'Silver CHA'
+  };
+
+  useEffect(() => {
+    if (activeTab === 'reports') {
+      fetchPastReports();
+    }
+  }, [activeTab]);
+
+  const fetchPastReports = async () => {
+    setLoading(true);
+    try {
+      // First try to get from backend
+      const response = await reportAPI.getAllReports();
+      if (response?.data && response.data.length > 0) {
+        setPastReports(response.data);
+      } else {
+        // If no backend data, get from localStorage
+        const localReports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+        setPastReports(localReports);
+      }
+    } catch (error) {
+      console.error('Error fetching reports from backend:', error);
+      // Fallback to localStorage
+      const localReports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+      
+      // Sort reports by date (most recent first)
+      const sortedReports = localReports.sort((a: DailyReport, b: DailyReport) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+      });
+      
+      setPastReports(sortedReports);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteReport = async (reportId: string) => {
+    if (window.confirm('Are you sure you want to delete this report?')) {
+      try {
+        // Try to delete from backend
+        await reportAPI.deleteReport(reportId);
+        
+        // Update state
+        const updatedReports = pastReports.filter(report => report.id !== reportId);
+        setPastReports(updatedReports);
+        
+        // Also update localStorage
+        const localReports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+        const updatedLocalReports = localReports.filter((report: DailyReport) => report.id !== reportId);
+        localStorage.setItem('dailyReports', JSON.stringify(updatedLocalReports));
+        
+        alert('Report deleted successfully');
+      } catch (error) {
+        console.error('Error deleting from backend:', error);
+        
+        // Still delete from localStorage even if backend fails
+        const updatedReports = pastReports.filter(report => report.id !== reportId);
+        setPastReports(updatedReports);
+        
+        const localReports = JSON.parse(localStorage.getItem('dailyReports') || '[]');
+        const updatedLocalReports = localReports.filter((report: DailyReport) => report.id !== reportId);
+        localStorage.setItem('dailyReports', JSON.stringify(updatedLocalReports));
+        
+        alert('Report deleted successfully');
+      }
+    }
   };
 
   const achievements = [
@@ -76,6 +155,12 @@ const Profile: React.FC = () => {
           onClick={() => setActiveTab('achievements')}
         >
           Achievements
+        </button>
+        <button
+          className={activeTab === 'reports' ? 'active' : ''}
+          onClick={() => setActiveTab('reports')}
+        >
+          Past Reports
         </button>
         <button
           className={activeTab === 'settings' ? 'active' : ''}
@@ -158,6 +243,80 @@ const Profile: React.FC = () => {
                   <p>Watch all video modules to unlock</p>
                 </div>
               </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'reports' && (
+          <div className="reports-tab">
+            <h3>Past Daily Reports</h3>
+            {loading ? (
+              <div className="loading-message">Loading reports...</div>
+            ) : pastReports.length === 0 ? (
+              <div className="no-reports">
+                <p>No reports found. Start submitting daily reports to see them here!</p>
+                <button className="btn-primary" onClick={() => navigate('/daily-report')}>
+                  Create Your First Report
+                </button>
+              </div>
+            ) : (
+              <div className="reports-list">
+                {pastReports.map(report => (
+                  <div key={report.id} className="report-card">
+                    <div className="report-header">
+                      <h4>{new Date(report.date).toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      })}</h4>
+                      <button 
+                        className="delete-btn" 
+                        onClick={() => handleDeleteReport(report.id)}
+                        title="Delete report"
+                      >
+                        🗑️
+                      </button>
+                    </div>
+                    <div className="report-details">
+                      <div className="report-stat">
+                        <span className="stat-icon">👥</span>
+                        <span className="stat-value">{report.patientsVisited}</span>
+                        <span className="stat-label">Patients</span>
+                      </div>
+                      <div className="report-stat">
+                        <span className="stat-icon">💉</span>
+                        <span className="stat-value">{report.vaccinationsGiven}</span>
+                        <span className="stat-label">Vaccinations</span>
+                      </div>
+                      <div className="report-stat">
+                        <span className="stat-icon">📚</span>
+                        <span className="stat-value">{report.healthEducation}</span>
+                        <span className="stat-label">Education Topic</span>
+                      </div>
+                    </div>
+                    {(report.challenges || report.notes) && (
+                      <div className="report-extra">
+                        {report.challenges && (
+                          <div className="report-field">
+                            <strong>Challenges:</strong> {report.challenges}
+                          </div>
+                        )}
+                        {report.notes && (
+                          <div className="report-field">
+                            <strong>Notes:</strong> {report.notes}
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="reports-actions">
+              <button className="btn-primary" onClick={() => navigate('/daily-report')}>
+                Create New Report
+              </button>
             </div>
           </div>
         )}

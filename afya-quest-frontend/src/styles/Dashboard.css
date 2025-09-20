@@ -1,116 +1,170 @@
-/* Dashboard.css */
+/* Dashboard.css - Mobile First Design */
 .dashboard {
-  padding: 1rem;
-  background: var(--background);
+  background: #F8F9FA;
   min-height: 100vh;
+  padding-bottom: 80px; /* Space for bottom nav */
+  position: relative;
 }
 
-.dashboard-header {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: linear-gradient(135deg, var(--primary-color), var(--success-color));
-  color: white;
-  border-radius: var(--border-radius);
-  margin-bottom: 1.5rem;
+/* Stats Header */
+.stats-header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-bottom: 1px solid #E5E7EB;
 }
 
-.dashboard-header h1 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-.tagline {
-  font-size: 1rem;
-  opacity: 0.9;
+.stat-icon {
+  font-size: 1.2rem;
 }
 
-/* User Stats */
-.user-stats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
+.stat-value {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #374151;
 }
 
-.stat-card {
+.stat-item.xp .stat-value {
+  color: #3B82F6;
+}
+
+/* Section Styles */
+.daily-todo-section,
+.learning-center-section {
+  padding: 1.5rem 1rem;
+}
+
+.section-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+/* Task Cards */
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.task-card {
+  display: flex;
+  align-items: center;
   background: white;
   padding: 1rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
-  text-align: center;
-  transition: transform 0.3s;
-}
-
-.stat-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.stat-number {
-  display: block;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: var(--primary-color);
-  margin-bottom: 0.25rem;
-}
-
-.stat-label {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-/* Features Grid */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-.feature-card {
-  background: white;
-  padding: 1.5rem;
-  border-radius: var(--border-radius);
-  box-shadow: var(--box-shadow);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
+  transition: all 0.2s;
+  position: relative;
 }
 
-.feature-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-  background: linear-gradient(135deg, rgba(46,125,50,0.05), rgba(76,175,80,0.05));
+.task-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
-.feature-icon {
-  font-size: 2.5rem;
-  margin-bottom: 0.75rem;
+.task-icon-container {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
 }
 
-.feature-card h3 {
+.task-icon {
+  font-size: 2rem;
+}
+
+.task-content {
+  flex: 1;
+}
+
+.task-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.25rem 0;
+}
+
+.required-indicator {
+  color: #EF4444;
   font-size: 1.1rem;
-  color: var(--text-primary);
-  margin-bottom: 0.5rem;
 }
 
-.feature-card p {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+.task-description {
+  font-size: 0.875rem;
+  color: #6B7280;
+  margin: 0;
   line-height: 1.4;
 }
 
-/* Quick Actions */
-.quick-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  padding: 1rem 0;
+.task-card.completed {
+  opacity: 0.6;
 }
 
-.quick-actions button {
-  flex: 1;
-  max-width: 200px;
+.task-check {
+  position: absolute;
+  right: 1rem;
+  width: 24px;
+  height: 24px;
+  background: #10B981;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: white;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 1rem;
+  z-index: 100;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  opacity: 0.6;
+}
+
+.nav-item.active {
+  opacity: 1;
+}
+
+.nav-item:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.nav-icon {
+  font-size: 1.5rem;
+  display: block;
 }
 
 /* Mobile Responsive */

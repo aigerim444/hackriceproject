@@ -1,0 +1,241 @@
+/* Itinerary.css */
+.itinerary {
+  min-height: 100vh;
+  background: #F8F9FA;
+  padding-bottom: 2rem;
+}
+
+.itinerary-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.itinerary-header h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #111827;
+  margin: 0;
+}
+
+.map-view-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* Date Section */
+.date-section {
+  padding: 1.5rem 1rem;
+  background: white;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.date-section h3 {
+  margin: 0 0 0.5rem 0;
+  color: #111827;
+  font-size: 1.1rem;
+}
+
+.summary {
+  margin: 0;
+  color: #6B7280;
+  font-size: 0.9rem;
+}
+
+/* Timeline */
+.timeline {
+  padding: 1.5rem 1rem;
+  position: relative;
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-marker {
+  position: absolute;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.7rem;
+  z-index: 2;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 7px;
+  top: 16px;
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background: #E5E7EB;
+  z-index: 1;
+}
+
+/* Location Cards */
+.location-card {
+  margin-left: 2rem;
+  flex: 1;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.location-card:hover {
+  transform: translateX(4px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.location-card.completed {
+  opacity: 0.7;
+}
+
+.location-time {
+  padding: 0.5rem 1rem;
+  background: #F3F4F6;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+.location-content {
+  padding: 1rem;
+}
+
+.location-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.location-icon {
+  font-size: 1.75rem;
+}
+
+.location-info h3 {
+  margin: 0 0 0.25rem 0;
+  color: #111827;
+  font-size: 1rem;
+}
+
+.address {
+  margin: 0;
+  color: #6B7280;
+  font-size: 0.875rem;
+}
+
+.location-meta {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #6B7280;
+}
+
+.location-notes {
+  padding: 0.5rem;
+  background: #FEF3C7;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  color: #92400E;
+  margin-bottom: 0.75rem;
+}
+
+.location-status {
+  font-weight: 600;
+  font-size: 0.875rem;
+}
+
+/* Action Panel */
+.action-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: white;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.check-in-btn {
+  width: 100%;
+  padding: 1rem;
+  background: #10B981;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.check-in-btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+}
+
+/* Progress Stats */
+.itinerary-stats {
+  margin: 2rem 1rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.itinerary-stats h3 {
+  margin: 0 0 1rem 0;
+  color: #111827;
+  font-size: 1.1rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: #E5E7EB;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #10B981);
+  transition: width 0.5s ease;
+}
+
+.progress-text {
+  text-align: center;
+  color: #6B7280;
+  font-size: 0.875rem;
+  margin: 0;
+}

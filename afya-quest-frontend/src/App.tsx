@@ -7,6 +7,8 @@ import DailyQuestions from './pages/DailyQuestions';
 import MapView from './pages/MapView';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import DailyReport from './pages/DailyReport';
+import Itinerary from './pages/Itinerary';
 import './styles/App.css';
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route path="/daily-questions" element={<DailyQuestions />} />
           <Route path="/map" element={<MapView />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/daily-report" element={<DailyReport />} />
+          <Route path="/itinerary" element={<Itinerary />} />
         </Routes>
       </div>
     </Router>
