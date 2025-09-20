@@ -6,25 +6,25 @@ Afya Quest is a mobile-first web application designed to empower Community Healt
 
 ## Features
 
-### 🎓 Interactive Learning
+### Interactive Learning
 - Bilingual support (English & Swahili)
 - Gamified curriculum with points and achievements
 - Progressive difficulty levels
 - Category-based lessons (Hygiene, Nutrition, Emergency Care, etc.)
 
-### 🎥 Video Modules and Lessons
+### Video Modules and Lessons
 - Content-based informational videos
 - Quiz integration with video lessons
 - Progress tracking for each module
 - Offline capability for downloaded content
 
-### ❓ Daily Questions
+### Daily Questions
 - Reinforcement learning through daily quizzes
 - Multiple difficulty levels (Easy, Medium, Hard)
 - Points-based reward system
 - Streak tracking to encourage daily engagement
 
-### 🗺️ Map-Based UI
+### Map-Based UI
 - Location-based navigation
 - Nearby health facilities finder
 - CHA network visualization
