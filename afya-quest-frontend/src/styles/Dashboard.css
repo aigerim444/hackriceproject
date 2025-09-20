@@ -53,19 +53,20 @@
 .task-list {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 
 .task-card {
   display: flex;
   align-items: center;
   background: white;
-  padding: 1rem;
-  border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
+  min-height: 80px;
 }
 
 .task-card:hover {
@@ -74,17 +75,19 @@
 }
 
 .task-icon-container {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 1rem;
+  margin-right: 1.25rem;
   flex-shrink: 0;
+  background: #F3F4F6;
+  border-radius: 12px;
 }
 
 .task-icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .task-content {
@@ -92,10 +95,10 @@
 }
 
 .task-title {
-  font-size: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #111827;
-  margin: 0 0 0.25rem 0;
+  margin: 0 0 0.5rem 0;
 }
 
 .required-indicator {
@@ -104,10 +107,10 @@
 }
 
 .task-description {
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   color: #6B7280;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .task-card.completed {

@@ -58,7 +58,7 @@ const Dashboard: React.FC = () => {
       id: 'itinerary',
       title: 'Daily Itinerary',
       description: 'Find your scheduled locations and patients here!',
-      icon: '📍',
+      icon: '🗺️',
       isRequired: true,
       isCompleted: false,
       path: '/itinerary'
@@ -67,7 +67,7 @@ const Dashboard: React.FC = () => {
       id: 'questions',
       title: 'Daily Questions!',
       description: 'Answer your three daily questions to collect your daily XP!',
-      icon: '📈',
+      icon: '❓',
       isRequired: true,
       isCompleted: false,
       path: '/daily-questions'
@@ -76,7 +76,7 @@ const Dashboard: React.FC = () => {
       id: 'report',
       title: 'Daily Report',
       description: 'Fill out the report at the end of the day.',
-      icon: '📝',
+      icon: '📊',
       isRequired: true,
       isCompleted: false,
       path: '/daily-report'
@@ -88,7 +88,7 @@ const Dashboard: React.FC = () => {
       id: 'review',
       title: 'Review Modules',
       description: 'Modules to review based on your mistakes!',
-      icon: '📖',
+      icon: '🎓',
       path: '/interactive-learning'
     }
   ];
