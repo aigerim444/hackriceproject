@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTotalXP, getStreak, getLives, initializeLivesIfNeeded } from '../utils/xpManager';
-import { hasCompletedTodaysReflection } from '../utils/reflectionManager';
 import BottomNavigation from '../components/BottomNavigation';
 import '../styles/Dashboard.css';
 
@@ -20,7 +19,6 @@ const Dashboard: React.FC = () => {
   const [streakCount, setStreakCount] = useState(getStreak());
   const [xpPoints, setXpPoints] = useState(getTotalXP());
   const [lives, setLives] = useState(getLives());
-  const [hasReflected, setHasReflected] = useState(hasCompletedTodaysReflection());
   
   useEffect(() => {
     // Initialize lives if needed
@@ -31,7 +29,6 @@ const Dashboard: React.FC = () => {
       setXpPoints(getTotalXP());
       setStreakCount(getStreak());
       setLives(getLives());
-      setHasReflected(hasCompletedTodaysReflection());
     };
     
     // Initial update
@@ -74,15 +71,6 @@ const Dashboard: React.FC = () => {
       isRequired: true,
       isCompleted: false,
       path: '/daily-questions'
-    },
-    {
-      id: 'reflection',
-      title: 'Daily Reflection',
-      description: 'Take a moment to reflect on your day and experiences.',
-      icon: '💭',
-      isRequired: false,
-      isCompleted: hasReflected,
-      path: '/profile?tab=daily-reflections'
     },
     {
       id: 'report',

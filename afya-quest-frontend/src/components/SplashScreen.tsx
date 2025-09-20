@@ -201,7 +201,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
       </div>
 
       <div className="splash-footer">
-        <p className="copyright">© 2024 Afya Quest. Making healthcare education accessible.</p>
+        <p className="copyright">© 2025 Afya Quest. Making healthcare education accessible.</p>
       </div>
     </div>
   );

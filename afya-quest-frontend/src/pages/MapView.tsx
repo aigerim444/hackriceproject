@@ -195,20 +195,8 @@ const MapView: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Set default position first
+    // Set fixed location to Kajiado Airport
     setUserLocation(defaultPosition);
-    
-    // Then try to get user's actual location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation([position.coords.latitude, position.coords.longitude]);
-        },
-        (error) => {
-          console.log('Error getting location:', error);
-        }
-      );
-    }
     
     // Mark map as ready after a small delay
     setTimeout(() => setMapReady(true), 100);
@@ -308,7 +296,9 @@ const MapView: React.FC = () => {
             <>
               <Marker position={userLocation}>
                 <Popup>
-                  <strong>Your Location</strong>
+                  <strong>Kajiado Airport</strong>
+                  <br />
+                  <span>Current Base Location</span>
                 </Popup>
               </Marker>
               <Circle
@@ -366,12 +356,6 @@ const MapView: React.FC = () => {
           ))}
           </MapContainer>
         )}
-        
-        {/* Map Controls */}
-        <div className="map-controls">
-          <button className="control-btn layers-btn">📐</button>
-          <button className="control-btn location-btn">📍</button>
-        </div>
       </div>
 
       {/* Map Legend */}
