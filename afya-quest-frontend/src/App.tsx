@@ -17,10 +17,12 @@ function App() {
   const [showSplash, setShowSplash] = useState(true);
   
   useEffect(() => {
-    // Clear any existing authentication tokens to ensure logged out state
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    sessionStorage.clear();
+    // Only clear auth on first mount when showing splash
+    if (showSplash) {
+      localStorage.removeItem('authToken');
+      localStorage.removeItem('user');
+      sessionStorage.clear();
+    }
     
     // Initialize lives on app start if needed
     initializeLivesIfNeeded();
@@ -31,7 +33,7 @@ function App() {
     return () => {
       document.body.classList.remove('has-bottom-nav');
     };
-  }, []);
+  }, [showSplash]);
   
   const handleSplashComplete = () => {
     setShowSplash(false);

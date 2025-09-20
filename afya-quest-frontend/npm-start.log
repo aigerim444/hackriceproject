@@ -1,0 +1,308 @@
+
+> afya-quest-frontend@1.0.0 start
+> react-scripts start
+
+(node:40071) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:40071) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:40071) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view afya-quest-frontend in the browser.
+
+  http://localhost:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 42:9:   'navigate' is assigned a value but never used                                                                       @typescript-eslint/no-unused-vars
+  Line 44:10:  'selectedView' is assigned a value but never used                                                                   @typescript-eslint/no-unused-vars
+  Line 44:24:  'setSelectedView' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+  Line 213:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 42:9:   'navigate' is assigned a value but never used                                                                       @typescript-eslint/no-unused-vars
+  Line 44:10:  'selectedView' is assigned a value but never used                                                                   @typescript-eslint/no-unused-vars
+  Line 44:24:  'setSelectedView' is assigned a value but never used                                                                @typescript-eslint/no-unused-vars
+  Line 213:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/pages/MapView.tsx
+Syntax error: ')' expected (362:8)
+ERROR in ./src/pages/MapView.tsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/src/pages/MapView.tsx: Unexpected token, expected "," (362:8)
+
+  360 |         </MapContainer>
+  361 |         
+> 362 |         {/* Map Controls */}
+      |         ^
+  363 |         <div className="map-controls">
+  364 |           <button className="control-btn layers-btn">📐</button>
+  365 |           <button className="control-btn location-btn">📍</button>
+    at constructor (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at TypeScriptParserMixin.raise (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:6630:19)
+    at TypeScriptParserMixin.unexpected (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:6650:16)
+    at TypeScriptParserMixin.expect (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:6930:12)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11669:14)
+    at TypeScriptParserMixin.parseExprAtom (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11335:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11085:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11070:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11050:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:9857:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10903:61)
+    at TypeScriptParserMixin.parseExprOpBaseRightExpr (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10990:34)
+    at TypeScriptParserMixin.parseExprOpRightExpr (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10985:21)
+    at TypeScriptParserMixin.parseExprOp (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10951:27)
+    at TypeScriptParserMixin.parseExprOp (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:9394:18)
+    at TypeScriptParserMixin.parseExprOps (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10912:17)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10885:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10835:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:9806:20)
+    at TypeScriptParserMixin.parseExpressionBase (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10788:23)
+    at /Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10784:39
+    at TypeScriptParserMixin.allowInAnd (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:12436:12)
+    at TypeScriptParserMixin.parseExpression (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10784:17)
+    at TypeScriptParserMixin.jsxParseExpressionContainer (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4665:31)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4744:36)
+    at TypeScriptParserMixin.jsxParseElementAt (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4731:32)
+    at TypeScriptParserMixin.jsxParseElement (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4782:17)
+    at TypeScriptParserMixin.parseExprAtom (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4792:19)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11085:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11070:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11050:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:9857:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10903:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10908:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10885:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10835:21)
+    at /Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:9795:39
+    at TypeScriptParserMixin.tryParse (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:6938:20)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:9795:18)
+    at /Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10804:39
+    at TypeScriptParserMixin.allowInAnd (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:12436:12)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:10804:17)
+    at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:12503:17)
+    at TypeScriptParserMixin.parseParenAndDistinguishExpression (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11683:28)
+    at TypeScriptParserMixin.parseExprAtom (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11335:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:4797:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11085:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11070:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/steve/Documents/GitHub/hackriceproject/afya-quest-frontend/node_modules/@babel/parser/lib/index.js:11050:23)
+
+ERROR in [eslint] 
+src/pages/MapView.tsx
+  Line 362:8:  Parsing error: ')' expected
+
+webpack compiled with 2 errors
+ERROR in src/pages/MapView.tsx:362:9
+TS1005: ')' expected.
+    360 |         </MapContainer>
+    361 |         
+  > 362 |         {/* Map Controls */}
+        |         ^
+    363 |         <div className="map-controls">
+    364 |           <button className="control-btn layers-btn">📐</button>
+    365 |           <button className="control-btn location-btn">📍</button>
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:  'useNavigate' is defined but never used                                                                                                                                                         @typescript-eslint/no-unused-vars
+  Line 47:9:  The 'defaultPosition' array makes the dependencies of useEffect Hook (at line 211) change on every render. To fix this, wrap the initialization of 'defaultPosition' in its own useMemo() Hook  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 215:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
