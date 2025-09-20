@@ -24,6 +24,14 @@ const DailyReport: React.FC = () => {
   });
 
   const handleInputChange = (fieldId: string, value: any) => {
+      // For number fields, validate that the value is not negative
+      if ((fieldId === 'patientsVisited' || fieldId === 'vaccinationsGiven') && value !== '') {
+        const numValue = parseInt(value);
+        if (numValue < 0) {
+          return; // Don't update state if negative
+        }
+      }
+    
     setReportData(prev => ({
       ...prev,
       [fieldId]: value
