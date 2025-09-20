@@ -1,97 +1,102 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import BottomNavigation from '../components/BottomNavigation';
 import '../styles/InteractiveLearning.css';
 
-interface Lesson {
+interface Module {
   id: string;
   title: string;
   titleSwahili: string;
-  description: string;
-  descriptionSwahili: string;
-  category: string;
+  icon: string;
   progress: number;
-  isLocked: boolean;
-  points: number;
+  totalLessons: number;
+  category: string;
+}
+
+interface ModuleCategory {
+  id: string;
+  title: string;
+  titleSwahili: string;
+  score: number;
+  maxScore: number;
+  modules: Module[];
 }
 
 const InteractiveLearning: React.FC = () => {
   const navigate = useNavigate();
   const [language, setLanguage] = useState<'en' | 'sw'>('en');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
 
-  const lessons: Lesson[] = [
+  const moduleCategories: ModuleCategory[] = [
     {
-      id: '1',
-      title: 'Basic Hygiene',
-      titleSwahili: 'Usafi wa Msingi',
-      description: 'Learn about proper handwashing and sanitation practices',
-      descriptionSwahili: 'Jifunze kuhusu kunawa mikono vizuri na njia za usafi',
-      category: 'hygiene',
-      progress: 100,
-      isLocked: false,
-      points: 50
+      id: 'anatomy',
+      title: 'Basic Anatomy',
+      titleSwahili: 'Anatomia ya Msingi',
+      score: 16,
+      maxScore: 40,
+      modules: [
+        {
+          id: 'anatomy-1',
+          title: 'Module 1',
+          titleSwahili: 'Moduli 1',
+          icon: '🫀', // anatomical heart
+          progress: 40,
+          totalLessons: 10,
+          category: 'anatomy'
+        }
+      ]
     },
     {
-      id: '2',
-      title: 'Nutrition Basics',
-      titleSwahili: 'Misingi ya Lishe',
-      description: 'Understanding balanced diet and nutrition requirements',
-      descriptionSwahili: 'Kuelewa mlo kamili na mahitaji ya lishe',
-      category: 'nutrition',
-      progress: 60,
-      isLocked: false,
-      points: 75
+      id: 'children',
+      title: "Children's Health",
+      titleSwahili: 'Afya ya Watoto',
+      score: 3,
+      maxScore: 40,
+      modules: [
+        {
+          id: 'children-1',
+          title: 'Module 2',
+          titleSwahili: 'Moduli 2',
+          icon: '👶', // child icon
+          progress: 7.5,
+          totalLessons: 10,
+          category: 'children'
+        }
+      ]
     },
     {
-      id: '3',
-      title: 'First Aid',
-      titleSwahili: 'Huduma ya Kwanza',
-      description: 'Basic first aid procedures for common injuries',
-      descriptionSwahili: 'Taratibu za msingi za huduma ya kwanza kwa majeraha ya kawaida',
-      category: 'emergency',
-      progress: 0,
-      isLocked: false,
-      points: 100
-    },
-    {
-      id: '4',
-      title: 'Disease Prevention',
-      titleSwahili: 'Kuzuia Magonjwa',
-      description: 'Preventive measures for common diseases',
-      descriptionSwahili: 'Hatua za kuzuia magonjwa ya kawaida',
-      category: 'prevention',
-      progress: 0,
-      isLocked: true,
-      points: 100
+      id: 'adult',
+      title: 'Adult Health',
+      titleSwahili: 'Afya ya Watu Wazima',
+      score: 0,
+      maxScore: 40,
+      modules: [
+        {
+          id: 'adult-1',
+          title: 'Module 3',
+          titleSwahili: 'Moduli 3',
+          icon: '❤️', // heart for adult health
+          progress: 0,
+          totalLessons: 10,
+          category: 'adult'
+        }
+      ]
     }
   ];
 
-  const categories = [
-    { id: 'all', name: 'All Topics', nameSwahili: 'Mada Zote' },
-    { id: 'hygiene', name: 'Hygiene', nameSwahili: 'Usafi' },
-    { id: 'nutrition', name: 'Nutrition', nameSwahili: 'Lishe' },
-    { id: 'emergency', name: 'Emergency Care', nameSwahili: 'Huduma ya Dharura' },
-    { id: 'prevention', name: 'Prevention', nameSwahili: 'Kuzuia' }
-  ];
+  const handleModuleClick = (module: Module) => {
+    console.log('Opening module:', module.id);
+    // Navigate to module detail (to be implemented)
+  };
 
-  const filteredLessons = selectedCategory === 'all' 
-    ? lessons 
-    : lessons.filter(lesson => lesson.category === selectedCategory);
-
-  const handleLessonClick = (lesson: Lesson) => {
-    if (!lesson.isLocked) {
-      // Navigate to lesson detail (to be implemented)
-      console.log('Opening lesson:', lesson.id);
-    }
+  const handleBrowseVideos = (categoryId: string) => {
+    console.log('Browse videos for:', categoryId);
+    navigate('/video-modules');
   };
 
   return (
-    <div className="interactive-learning">
-      <header className="page-header">
-        <button className="back-btn" onClick={() => navigate('/dashboard')}>
-          ←
-        </button>
-        <h1>{language === 'en' ? 'Interactive Learning' : 'Kujifunza kwa Njia ya Mwingiliano'}</h1>
+    <div className="modules-page">
+      <header className="modules-header">
+        <h1>{language === 'en' ? 'Modules' : 'Moduli'}</h1>
         <button 
           className="language-toggle"
           onClick={() => setLanguage(language === 'en' ? 'sw' : 'en')}
@@ -100,71 +105,64 @@ const InteractiveLearning: React.FC = () => {
         </button>
       </header>
 
-      <div className="category-filters">
-        {categories.map(category => (
-          <button
-            key={category.id}
-            className={`category-btn ${selectedCategory === category.id ? 'active' : ''}`}
-            onClick={() => setSelectedCategory(category.id)}
-          >
-            {language === 'en' ? category.name : category.nameSwahili}
-          </button>
-        ))}
-      </div>
-
-      <div className="progress-overview">
-        <div className="progress-stat">
-          <span className="stat-label">
-            {language === 'en' ? 'Completed' : 'Zilizokamilika'}
-          </span>
-          <span className="stat-value">1/4</span>
-        </div>
-        <div className="progress-stat">
-          <span className="stat-label">
-            {language === 'en' ? 'Points Earned' : 'Pointi Zilizopatikana'}
-          </span>
-          <span className="stat-value">50</span>
-        </div>
-      </div>
-
-      <div className="lessons-list">
-        {filteredLessons.map(lesson => (
-          <div
-            key={lesson.id}
-            className={`lesson-card ${lesson.isLocked ? 'locked' : ''}`}
-            onClick={() => handleLessonClick(lesson)}
-          >
-            <div className="lesson-icon">
-              {lesson.isLocked ? '🔒' : lesson.progress === 100 ? '✅' : '📖'}
+      <div className="modules-container">
+        {moduleCategories.map(category => (
+          <div key={category.id} className="module-category">
+            <div className="category-header">
+              <h2 className="category-title">
+                {language === 'en' ? category.title : category.titleSwahili}
+              </h2>
+              <div className="category-score">
+                <span className="crown-icon">👑</span>
+                <span className="score-text">{category.score}/{category.maxScore}</span>
+              </div>
             </div>
-            <div className="lesson-content">
-              <h3>{language === 'en' ? lesson.title : lesson.titleSwahili}</h3>
-              <p>{language === 'en' ? lesson.description : lesson.descriptionSwahili}</p>
-              <div className="lesson-meta">
-                <span className="points">+{lesson.points} pts</span>
-                {!lesson.isLocked && (
-                  <div className="progress-bar">
-                    <div 
-                      className="progress-fill" 
-                      style={{ width: `${lesson.progress}%` }}
-                    />
+            
+            <div className="module-row">
+              {category.modules.map(module => (
+                <div 
+                  key={module.id} 
+                  className="module-card"
+                  onClick={() => handleModuleClick(module)}
+                >
+                  <div className="module-content">
+                    <div className="module-icon">{module.icon}</div>
+                    <h3 className="module-title">
+                      {language === 'en' ? module.title : module.titleSwahili}
+                    </h3>
+                    <div className="module-progress">
+                      <div className="crown-small">👑</div>
+                      <div className="progress-bar-container">
+                        <div 
+                          className="progress-bar-fill"
+                          style={{ width: `${module.progress}%` }}
+                        />
+                      </div>
+                    </div>
                   </div>
-                )}
+                </div>
+              ))}
+              
+              <div 
+                className="related-videos-card"
+                onClick={() => handleBrowseVideos(category.id)}
+              >
+                <div className="videos-content">
+                  <h3 className="videos-title">
+                    {language === 'en' ? 'Related Videos' : 'Video Zinazohusiana'}
+                  </h3>
+                  <button className="browse-btn">
+                    <span>{language === 'en' ? 'Browse' : 'Angalia'}</span>
+                    <span className="browse-arrow">▶</span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))}
       </div>
-
-      <div className="gamification-banner">
-        <h3>{language === 'en' ? '🏆 Level Up!' : '🏆 Panda Kiwango!'}</h3>
-        <p>
-          {language === 'en' 
-            ? 'Complete 2 more lessons to unlock Disease Prevention module'
-            : 'Kamilisha masomo 2 zaidi ili kufungua moduli ya Kuzuia Magonjwa'
-          }
-        </p>
-      </div>
+      
+      <BottomNavigation />
     </div>
   );
 };

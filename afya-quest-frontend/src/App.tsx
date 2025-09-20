@@ -16,6 +16,13 @@ function App() {
   useEffect(() => {
     // Initialize lives on app start if needed
     initializeLivesIfNeeded();
+    
+    // Add body class for bottom navigation spacing
+    document.body.classList.add('has-bottom-nav');
+    
+    return () => {
+      document.body.classList.remove('has-bottom-nav');
+    };
   }, []);
   
   return (

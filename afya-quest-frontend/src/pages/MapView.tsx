@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
 import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import { useNavigate } from 'react-router-dom';
+import BottomNavigation from '../components/BottomNavigation';
+import '../styles/MapView.css';
 import '../styles/MapView.css';
 
 // Fix for default markers in react-leaflet
@@ -343,6 +344,7 @@ const MapView: React.FC = () => {
         <p>Tap on any marker to view details and get directions.</p>
         <p>Use the Kajiado County navigation for easier access to nearby facilities.</p>
       </div>
+      <BottomNavigation />
     </div>
   );
 };
