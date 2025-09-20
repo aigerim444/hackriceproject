@@ -14,6 +14,7 @@
   z-index: 9999;
   opacity: 1;
   transition: opacity 0.5s ease-out;
+  cursor: pointer;
 }
 
 @keyframes gradientShift {
@@ -223,6 +224,144 @@
   letter-spacing: 0.5px;
 }
 
+/* Sound button */
+.sound-button {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: buttonPulse 2s ease-in-out infinite;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.sound-button:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.sound-button:active {
+  transform: scale(0.98);
+}
+
+/* Subtle sound button (when autoplay fails) */
+.sound-button.subtle {
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+.sound-button.subtle:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.sound-button.subtle svg path {
+  stroke: white;
+}
+
+.sound-button.subtle span {
+  font-size: 1.2rem;
+  margin-left: -0.2rem;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+.sound-button svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sound-button svg path {
+  stroke: #667eea;
+}
+
+.sound-button span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #667eea;
+  letter-spacing: 0.5px;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Audio hint (fallback) */
+.audio-hint {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+.audio-hint p {
+  color: white;
+  font-size: 0.9rem;
+  margin: 0;
+  font-weight: 300;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: pulseDot 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .app-title {
@@ -251,6 +390,16 @@
   .pulse-ring {
     width: 100px;
     height: 100px;
+  }
+  
+  .sound-button {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+  
+  .sound-button span {
+    font-size: 0.9rem;
   }
 }
 

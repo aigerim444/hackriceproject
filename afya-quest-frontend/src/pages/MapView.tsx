@@ -4,7 +4,9 @@ import L from 'leaflet';
 import { useNavigate } from 'react-router-dom';
 import BottomNavigation from '../components/BottomNavigation';
 import '../styles/MapView.css';
-import '../styles/MapView.css';
+
+// Import Leaflet CSS - Critical for map to display correctly
+import 'leaflet/dist/leaflet.css';
 
 // Fix for default markers in react-leaflet
 // This is a workaround for the default marker icon issue with Webpack
@@ -37,177 +39,167 @@ interface ClientHouse {
 }
 
 const MapView: React.FC = () => {
-  const navigate = useNavigate();
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-  const [selectedView, setSelectedView] = useState<'facilities' | 'clients'>('facilities');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'to-visit' | 'visited' | 'scheduled'>('all');
+  const [mapReady, setMapReady] = useState(false);
   
-  // Default to Kajiado Town coordinates
-  const defaultPosition: [number, number] = [-1.8527, 36.7816];
+  // Default to Kajiado Airport coordinates (Kenya)
+  const defaultPosition: [number, number] = [-1.8581, 36.9823];
   
   const healthFacilities: HealthFacility[] = [
     {
       id: '1',
-      name: 'Kajiado County Referral Hospital',
+      name: 'Kajiado Referral Hospital',
       type: 'hospital',
-      position: [-1.8523, 36.7765],
+      position: [-1.8522, 36.7820],
       servicesAvailable: ['Emergency', 'Maternity', 'Pediatrics', 'Surgery', 'Outpatient', 'Laboratory'],
-      distance: 0.5
+      distance: 20.3
     },
     {
       id: '2',
-      name: 'Ongata Rongai Sub-County Hospital',
+      name: 'AIC Kajiado Hospital',
       type: 'hospital',
-      position: [-1.3956, 36.7412],
+      position: [-1.8489, 36.7845],
       servicesAvailable: ['Emergency', 'Maternity', 'Pediatrics', 'Outpatient', 'X-Ray'],
-      distance: 52.3
+      distance: 19.8
     },
     {
       id: '3',
-      name: 'Ngong Sub-County Hospital',
+      name: 'Kitengela Sub-County Hospital',
       type: 'hospital',
-      position: [-1.3535, 36.6639],
+      position: [-1.4737, 36.9532],
       servicesAvailable: ['Emergency', 'Maternity', 'Surgery', 'Laboratory', 'Pharmacy'],
-      distance: 58.7
+      distance: 42.7
     },
     {
       id: '4',
-      name: 'Kitengela Health Center',
+      name: 'Ongata Rongai Health Center',
       type: 'health-center',
-      position: [-1.4744, 36.9556],
+      position: [-1.3961, 36.7619],
       servicesAvailable: ['Vaccination', 'Maternal Care', 'Outpatient', 'Family Planning'],
-      distance: 42.1
+      distance: 55.2
     },
     {
       id: '5',
       name: 'Namanga Health Center',
       type: 'health-center',
-      position: [-2.5466, 36.7827],
+      position: [-2.5443, 36.7869],
       servicesAvailable: ['Primary Care', 'Vaccination', 'Maternal Health', 'HIV Testing'],
-      distance: 77.2
+      distance: 78.9
     },
     {
       id: '6',
-      name: 'Bissil Health Center',
+      name: 'Kajiado Airport Dispensary',
       type: 'clinic',
-      position: [-1.8774, 36.8229],
+      position: [-1.8595, 36.9801],
       servicesAvailable: ['Primary Care', 'Vaccination', 'Family Planning'],
-      distance: 5.8
+      distance: 0.3
     },
     {
       id: '7',
-      name: 'Oloitokitok Sub-County Hospital',
+      name: 'Ilbisil Health Center',
       type: 'hospital',
-      position: [-2.9561, 37.5269],
+      position: [-1.9234, 36.8912],
       servicesAvailable: ['Emergency', 'Maternity', 'Outpatient', 'Laboratory'],
-      distance: 142.5
+      distance: 11.2
     },
     {
       id: '8',
-      name: 'Kimana Health Center',
+      name: 'Oloosirkon Health Center',
       type: 'clinic',
-      position: [-2.7528, 37.4625],
+      position: [-1.7856, 36.9234],
       servicesAvailable: ['Primary Care', 'Maternal Health', 'Vaccination'],
-      distance: 120.3
+      distance: 9.4
     }
   ];
 
   const clientHouses: ClientHouse[] = [
     {
       id: '1',
-      address: '123 Savannah Road',
-      clientName: 'Amboseli Village, Kajiado County, Kenya',
-      position: [-1.8567, 36.7823],
+      address: '123 Airport Road',
+      clientName: 'Selina Nkoya Family',
+      position: [-1.8623, 36.9789],
       status: 'to-visit',
-      distance: 1.2,
+      distance: 0.5,
       description: 'Maternal health check-up needed'
     },
     {
       id: '2',
-      address: '45 Elephant Trail',
-      clientName: 'Oloitokitok, Kajiado County, Kenya', 
-      position: [-1.8491, 36.7798],
+      address: '45 Bissil Road',
+      clientName: 'Ole Sankale Household', 
+      position: [-1.8712, 36.9901],
       status: 'to-visit',
-      distance: 1.9,
+      distance: 1.8,
       description: 'Child vaccination due'
     },
     {
       id: '3',
-      address: '78 Acacia Drive',
+      address: '78 Mashuuru Village',
       clientName: 'Grace Nasieku',
       position: [-1.8753, 36.8201],
       status: 'visited',
       lastVisit: '2 days ago',
-      distance: 2.3,
+      distance: 16.7,
       description: 'Follow-up completed'
     },
     {
       id: '4',
-      address: '22 Baobab Street',
+      address: '22 Kajiado Town',
       clientName: 'David Lekishon Family',
-      position: [-1.8612, 36.7756],
+      position: [-1.8512, 36.7798],
       status: 'scheduled',
       nextVisit: 'Tomorrow 10:00 AM',
-      distance: 0.8,
+      distance: 20.1,
       description: 'Family planning consultation'
     },
     {
       id: '5',
-      address: '56 Mara Road',
+      address: '56 Ilbisil Village',
       clientName: 'Sarah Entito',
-      position: [-1.4798, 36.9523],
+      position: [-1.9289, 36.8956],
       status: 'visited',
       lastVisit: '1 week ago',
-      distance: 42.1,
+      distance: 11.8,
       description: 'Diabetes monitoring completed'
     },
     {
       id: '6',
-      address: '89 Kilimanjaro View',
+      address: '89 Oloosirkon Area',
       clientName: 'Peter Kisemei Household',
-      position: [-2.5512, 36.7856],
+      position: [-1.7901, 36.9267],
       status: 'to-visit',
-      distance: 77.2,
+      distance: 9.7,
       description: 'Hypertension screening needed'
     },
     {
       id: '7',
-      address: '34 Simba Lane',
+      address: '34 Magadi Road',
       clientName: 'Mary Ole Sankale',
-      position: [-1.8523, 36.7665],
+      position: [-1.9012, 37.0123],
       status: 'scheduled',
       nextVisit: 'Friday 2:00 PM',
-      distance: 1.1,
+      distance: 6.2,
       description: 'Prenatal care appointment'
     },
     {
       id: '8',
-      address: '67 Zebra Close',
+      address: '67 Isinya Town',
       clientName: 'Joseph Mutua Family',
-      position: [-1.8734, 36.8123],
+      position: [-1.6734, 36.8423],
       status: 'visited',
       lastVisit: '3 days ago',
-      distance: 3.2,
+      distance: 24.3,
       description: 'Health education session completed'
     }
   ];
 
   useEffect(() => {
-    // Get user's location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation([position.coords.latitude, position.coords.longitude]);
-        },
-        (error) => {
-          console.log('Error getting location:', error);
-          setUserLocation(defaultPosition);
-        }
-      );
-    } else {
-      setUserLocation(defaultPosition);
-    }
+    // Set fixed location to Kajiado Airport
+    setUserLocation(defaultPosition);
+    
+    // Mark map as ready after a small delay
+    setTimeout(() => setMapReady(true), 100);
   }, []);
 
   const getMarkerIcon = (type: string) => {
@@ -282,11 +274,18 @@ const MapView: React.FC = () => {
       </div>
 
       <div className="map-container">
-        <MapContainer
-          center={mapCenter}
-          zoom={13}
-          style={{ height: '500px', width: '100%' }}
-        >
+        {mapReady && mapCenter && (
+          <MapContainer
+            center={mapCenter}
+            zoom={13}
+            style={{ height: '500px', width: '100%' }}
+            scrollWheelZoom={true}
+            zoomControl={true}
+            attributionControl={true}
+            doubleClickZoom={true}
+            dragging={true}
+            touchZoom={true}
+          >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -297,7 +296,9 @@ const MapView: React.FC = () => {
             <>
               <Marker position={userLocation}>
                 <Popup>
-                  <strong>Your Location</strong>
+                  <strong>Kajiado Airport</strong>
+                  <br />
+                  <span>Current Base Location</span>
                 </Popup>
               </Marker>
               <Circle
@@ -353,13 +354,8 @@ const MapView: React.FC = () => {
               </Popup>
             </Marker>
           ))}
-        </MapContainer>
-        
-        {/* Map Controls */}
-        <div className="map-controls">
-          <button className="control-btn layers-btn">📐</button>
-          <button className="control-btn location-btn">📍</button>
-        </div>
+          </MapContainer>
+        )}
       </div>
 
       {/* Map Legend */}

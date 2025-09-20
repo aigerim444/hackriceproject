@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { reportAPI } from '../services/api';
-import { useTheme } from '../contexts/ThemeContext';
+import { 
+  hasCompletedThisWeeksReflection,
+  saveWeeklyReflection,
+  getWeeklyReflections,
+  deleteWeeklyReflection,
+  availableModules,
+  type WeeklyReflection
+} from '../utils/reflectionManager';
 import BottomNavigation from '../components/BottomNavigation';
 import '../styles/Profile.css';
 
@@ -17,10 +24,20 @@ interface DailyReport {
 
 const Profile: React.FC = () => {
   const navigate = useNavigate();
-  const { isDarkMode, toggleDarkMode } = useTheme();
-  const [activeTab, setActiveTab] = useState<'overview' | 'achievements' | 'reports' | 'settings'>('overview');
+  const location = useLocation();
+  const [activeTab, setActiveTab] = useState<'overview' | 'achievements' | 'reports' | 'settings' | 'weekly-reflections'>('overview');
   const [pastReports, setPastReports] = useState<DailyReport[]>([]);
   const [loading, setLoading] = useState(false);
+  
+  // Reflection states
+  const [weeklyReflections, setWeeklyReflections] = useState<WeeklyReflection[]>([]);
+  const [weeklyFormData, setWeeklyFormData] = useState({
+    difficultModule: '',
+    satisfactionRating: 0,
+    comments: ''
+  });
+
+  const hasReflectedThisWeek = hasCompletedThisWeeksReflection();
 
   const userInfo = {
     name: 'Steve Zhang',
@@ -36,8 +53,22 @@ const Profile: React.FC = () => {
   };
 
   useEffect(() => {
+    // Check for URL parameters to set active tab
+    const urlParams = new URLSearchParams(location.search);
+    const tab = urlParams.get('tab');
+    if (tab && ['overview', 'achievements', 'reports', 'settings', 'weekly-reflections'].includes(tab)) {
+      setActiveTab(tab as any);
+    }
+    
+    // Load reflections on component mount
+    setWeeklyReflections(getWeeklyReflections());
+  }, [location.search]);
+
+  useEffect(() => {
     if (activeTab === 'reports') {
       fetchPastReports();
+    } else if (activeTab === 'weekly-reflections') {
+      setWeeklyReflections(getWeeklyReflections());
     }
   }, [activeTab]);
 
@@ -66,6 +97,34 @@ const Profile: React.FC = () => {
       setPastReports(sortedReports);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleWeeklyReflectionSubmit = () => {
+    if (!weeklyFormData.difficultModule || weeklyFormData.satisfactionRating === 0) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    
+    try {
+      saveWeeklyReflection(
+        weeklyFormData.difficultModule,
+        weeklyFormData.satisfactionRating,
+        weeklyFormData.comments.trim()
+      );
+      setWeeklyFormData({ difficultModule: '', satisfactionRating: 0, comments: '' });
+      setWeeklyReflections(getWeeklyReflections());
+      alert('Weekly reflection saved successfully!');
+    } catch (error) {
+      console.error('Error saving weekly reflection:', error);
+      alert('Failed to save reflection. Please try again.');
+    }
+  };
+
+  const handleDeleteWeeklyReflection = (reflectionId: string) => {
+    if (window.confirm('Are you sure you want to delete this reflection?')) {
+      deleteWeeklyReflection(reflectionId);
+      setWeeklyReflections(getWeeklyReflections());
     }
   };
 
@@ -170,6 +229,12 @@ const Profile: React.FC = () => {
           onClick={() => setActiveTab('settings')}
         >
           Settings
+        </button>
+        <button
+          className={activeTab === 'weekly-reflections' ? 'active' : ''}
+          onClick={() => setActiveTab('weekly-reflections')}
+        >
+          Weekly Reflections
         </button>
       </div>
 
@@ -329,54 +394,28 @@ const Profile: React.FC = () => {
             <h3>Settings</h3>
             <div className="settings-list">
               <div className="setting-item">
-                <div className="setting-info">
-                  <span className="setting-title">Dark Mode</span>
-                  <span className="setting-description">Switch between light and dark themes</span>
-                </div>
-                <label className="switch">
-                  <input 
-                    type="checkbox" 
-                    checked={isDarkMode}
-                    onChange={toggleDarkMode}
-                  />
-                  <span className="slider"></span>
-                </label>
-              </div>
-              <div className="setting-item">
-                <div className="setting-info">
-                  <span className="setting-title">Language Preference</span>
-                  <span className="setting-description">Choose your preferred language</span>
-                </div>
+                <span>Language Preference</span>
                 <select>
                   <option>English</option>
                   <option>Swahili</option>
                 </select>
               </div>
               <div className="setting-item">
-                <div className="setting-info">
-                  <span className="setting-title">Notifications</span>
-                  <span className="setting-description">Receive push notifications</span>
-                </div>
+                <span>Notifications</span>
                 <label className="switch">
                   <input type="checkbox" defaultChecked />
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="setting-item">
-                <div className="setting-info">
-                  <span className="setting-title">Offline Mode</span>
-                  <span className="setting-description">Download content for offline use</span>
-                </div>
+                <span>Offline Mode</span>
                 <label className="switch">
                   <input type="checkbox" />
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="setting-item">
-                <div className="setting-info">
-                  <span className="setting-title">Daily Reminders</span>
-                  <span className="setting-description">Get reminded to complete daily tasks</span>
-                </div>
+                <span>Daily Reminders</span>
                 <label className="switch">
                   <input type="checkbox" defaultChecked />
                   <span className="slider"></span>
@@ -387,6 +426,124 @@ const Profile: React.FC = () => {
               <button className="btn-secondary">Change Password</button>
               <button className="btn-primary">Download Certificate</button>
               <button className="btn-danger">Delete Account</button>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'weekly-reflections' && (
+          <div className="weekly-reflections-tab">
+            <h3>Weekly Reflections</h3>
+            
+            {!hasReflectedThisWeek ? (
+              <div className="weekly-reflection-form">
+                <h4>Weekly Reflection</h4>
+                
+                <div className="form-field">
+                  <label>Which module did you find most difficult this week? <span className="required">*</span></label>
+                  <select 
+                    value={weeklyFormData.difficultModule}
+                    onChange={(e) => setWeeklyFormData(prev => ({ ...prev, difficultModule: e.target.value }))}
+                    className="module-select"
+                  >
+                    <option value="">Select Module</option>
+                    {availableModules.map(module => (
+                      <option key={module} value={module}>{module}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="form-field">
+                  <label>How satisfied are you with this week's training? <span className="required">*</span></label>
+                  <div className="star-rating">
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <button
+                        key={star}
+                        type="button"
+                        className={`star ${weeklyFormData.satisfactionRating >= star ? 'active' : ''}`}
+                        onClick={() => setWeeklyFormData(prev => ({ ...prev, satisfactionRating: star }))}
+                      >
+                        ⭐
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="form-field">
+                  <label>Thoughts, comments, concerns?</label>
+                  <textarea
+                    value={weeklyFormData.comments}
+                    onChange={(e) => setWeeklyFormData(prev => ({ ...prev, comments: e.target.value }))}
+                    placeholder="Type here!"
+                    rows={4}
+                    className="comments-textarea"
+                  />
+                </div>
+
+                <button 
+                  className="btn-primary weekly-submit-btn"
+                  onClick={handleWeeklyReflectionSubmit}
+                  disabled={!weeklyFormData.difficultModule || weeklyFormData.satisfactionRating === 0}
+                >
+                  Submit Weekly Reflection
+                </button>
+              </div>
+            ) : (
+              <div className="reflection-completed">
+                <p>✅ You've already completed this week's reflection! Come back next week.</p>
+              </div>
+            )}
+
+            <div className="past-weekly-reflections">
+              <h4>Past Weekly Reflections</h4>
+              {weeklyReflections.length === 0 ? (
+                <div className="no-reflections">
+                  <p>No weekly reflections yet. Complete your first weekly reflection above!</p>
+                </div>
+              ) : (
+                <div className="weekly-reflections-list">
+                  {weeklyReflections.map(reflection => (
+                    <div key={reflection.id} className="weekly-reflection-card">
+                      <div className="reflection-header">
+                        <span className="reflection-date">
+                          Week of {new Date(reflection.date).toLocaleDateString('en-US', { 
+                            year: 'numeric', 
+                            month: 'long', 
+                            day: 'numeric' 
+                          })}
+                        </span>
+                        <button 
+                          className="delete-btn" 
+                          onClick={() => handleDeleteWeeklyReflection(reflection.id)}
+                          title="Delete reflection"
+                        >
+                          🗑️
+                        </button>
+                      </div>
+                      <div className="weekly-reflection-content">
+                        <div className="reflection-field">
+                          <strong>Most Difficult Module:</strong> {reflection.difficultModule}
+                        </div>
+                        <div className="reflection-field">
+                          <strong>Satisfaction Rating:</strong>
+                          <div className="rating-display">
+                            {[1, 2, 3, 4, 5].map(star => (
+                              <span key={star} className={`star ${reflection.satisfactionRating >= star ? 'filled' : ''}`}>
+                                ⭐
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        {reflection.comments && (
+                          <div className="reflection-field">
+                            <strong>Comments:</strong>
+                            <p>{reflection.comments}</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}

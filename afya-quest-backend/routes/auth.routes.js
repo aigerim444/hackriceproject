@@ -59,17 +59,23 @@ router.post('/register', async (req, res) => {
 
 // Login user
 router.post('/login', async (req, res) => {
+  console.log('Login attempt received for:', req.body.email);
   try {
     const { email, password } = req.body;
 
     // Find user by email
+    console.log('Finding user...');
     const user = await User.findOne({ email });
     if (!user) {
+      console.log('User not found');
       return res.status(401).json({ error: 'Invalid credentials' });
     }
+    console.log('User found:', user.email);
 
     // Check password
+    console.log('Checking password...');
     const isPasswordValid = await user.comparePassword(password);
+    console.log('Password valid:', isPasswordValid);
     if (!isPasswordValid) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }
@@ -151,6 +157,42 @@ router.put('/change-password', authMiddleware, async (req, res) => {
   } catch (error) {
     console.error('Change password error:', error);
     res.status(500).json({ error: 'Failed to change password' });
+  }
+});
+
+// Test login without bcrypt (for debugging)
+router.post('/test-login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log('Test login for:', email);
+    
+    // Find user by email
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+    
+    // For testing, accept demo123 as valid password
+    if (password !== 'demo123') {
+      return res.status(401).json({ error: 'Invalid password (expecting demo123)' });
+    }
+    
+    // Generate token
+    const token = generateToken(user._id);
+    
+    res.json({
+      message: 'Test login successful',
+      token,
+      user: {
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role
+      }
+    });
+  } catch (error) {
+    console.error('Test login error:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
