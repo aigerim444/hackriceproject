@@ -17,10 +17,11 @@ Steve is your new friendly AI health assistant, powered by Google Gemini, ready 
 - **Authentication**: Protected with existing auth middleware
 - **Model**: Gemini 1.5 Flash (fast and efficient)
 
-### 🎨 UI Features
+### 🎆 UI Features
 - **Floating Chat Button**: Bottom-left corner with pulse animation
 - **Chat Window**: Modern design with Steve's branding
 - **Avatar**: 👨‍⚕️ Health professional emoji
+- **Authentication Required**: Steve only appears after user login for security
 - **Responsive**: Works on desktop and mobile
 - **Real-time**: Typing indicators and smooth animations
 
@@ -61,10 +62,11 @@ node test-steve.js
 ## 💬 How to Use Steve
 
 1. **Access the App**: Go to http://localhost:3000
-2. **Find Steve**: Look for the floating chat button in the bottom-left corner
-3. **Start Chatting**: Click the button to open the chat window
-4. **Meet Steve**: He'll introduce himself and offer help
-5. **Ask Questions**: Steve can help with health education, learning tips, and platform guidance
+2. **Log In First**: Use the demo credentials (demo@afyaquest.com / demo123) or your account
+3. **Find Steve**: After logging in, look for the floating chat button in the bottom-left corner
+4. **Start Chatting**: Click the button to open the chat window
+5. **Meet Steve**: He'll introduce himself and offer help
+6. **Ask Questions**: Steve can help with health education, learning tips, and platform guidance
 
 ## 📝 Example Questions for Steve
 
