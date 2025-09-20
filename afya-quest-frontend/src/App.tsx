@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -9,14 +9,26 @@ import InteractiveLearning from './pages/InteractiveLearning';
 import VideoModules from './pages/VideoModules';
 import Profile from './pages/Profile';
 import MapView from './pages/MapView';
+import ChatButton from './components/ChatButton';
+import ChatWindow from './components/ChatWindow';
 import { initializeLivesIfNeeded } from './utils/xpManager';
 import './styles/App.css';
 
 function App() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   useEffect(() => {
     // Initialize lives on app start if needed
     initializeLivesIfNeeded();
   }, []);
+
+  const handleChatToggle = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  };
   
   return (
     <Router>
@@ -33,6 +45,16 @@ function App() {
           <Route path="/daily-report" element={<DailyReport />} />
           <Route path="/itinerary" element={<Itinerary />} />
         </Routes>
+
+        {/* AI Chatbot */}
+        <ChatButton 
+          isOpen={isChatOpen} 
+          onClick={handleChatToggle} 
+        />
+        <ChatWindow 
+          isOpen={isChatOpen} 
+          onClose={handleChatClose} 
+        />
       </div>
     </Router>
   );
