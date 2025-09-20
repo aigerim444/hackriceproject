@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { addXP, getStreak, addLives, removeLives, getLives, XP_REWARDS } from '../utils/xpManager';
+import { playCorrectAnswerSound, playIncorrectAnswerSound, initSounds } from '../utils/soundManager';
 import BottomNavigation from '../components/BottomNavigation';
 import '../styles/DailyQuestions.css';
 
@@ -76,11 +77,14 @@ const DailyQuestions: React.FC = () => {
   const currentQuestion = dailyQuestions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === dailyQuestions.length - 1;
 
-  const handleAnswerSelect = (answerIndex: number) => {
+  const handleAnswerSelect = async (answerIndex: number) => {
     if (answeredQuestions.has(currentQuestion.id)) return;
     
     setSelectedAnswer(answerIndex);
     setShowExplanation(true);
+    
+    // Initialize audio context on first interaction
+    await initSounds();
     
     if (answerIndex === currentQuestion.correctAnswer) {
       setScore(score + currentQuestion.points);
@@ -90,10 +94,14 @@ const DailyQuestions: React.FC = () => {
       // Add 2 lives for correct answer
       const newLives = addLives(2, 'Correct answer!');
       setCurrentLives(newLives);
+      // Play success sound
+      playCorrectAnswerSound();
     } else {
       // Remove 1 life for wrong answer
       const newLives = removeLives(1, 'Wrong answer');
       setCurrentLives(newLives);
+      // Play error sound
+      playIncorrectAnswerSound();
     }
     
     setAnsweredQuestions(new Set([...answeredQuestions, currentQuestion.id]));
