@@ -1,0 +1,244 @@
+/* MapView.css */
+.map-view {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: white;
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.map-header h1 {
+  flex: 1;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.view-toggle {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.view-toggle button {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--primary-color);
+  background: white;
+  color: var(--primary-color);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.view-toggle button.active {
+  background: var(--primary-color);
+  color: white;
+}
+
+.view-toggle button:hover:not(.active) {
+  background: rgba(46,125,50,0.1);
+}
+
+/* Map Container */
+.map-container {
+  margin: 1rem;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
+
+/* Custom marker styles */
+.custom-div-icon {
+  background: transparent;
+  border: none;
+}
+
+.cha-marker {
+  background: transparent;
+  border: none;
+}
+
+/* Popup styles */
+.facility-popup h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.facility-popup p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.facility-popup .services {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #E0E0E0;
+}
+
+.facility-popup .services strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.facility-popup ul {
+  margin: 0;
+  padding-left: 1.2rem;
+  font-size: 0.85rem;
+}
+
+.cha-popup h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+}
+
+.cha-popup p {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+}
+
+.cha-popup .active {
+  color: var(--success-color);
+  font-weight: 500;
+}
+
+.cha-popup .inactive {
+  color: var(--text-secondary);
+}
+
+/* Map Legend */
+.map-legend {
+  margin: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.map-legend h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.legend-items {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.legend-item span:first-child {
+  font-size: 1.2rem;
+}
+
+/* Location Stats */
+.location-stats {
+  margin: 1rem;
+  padding: 1rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.location-stats h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 0.75rem;
+  background: var(--background);
+  border-radius: var(--border-radius);
+}
+
+.stat-card .stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 0.25rem;
+}
+
+.stat-card .stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Navigation Info */
+.navigation-info {
+  margin: 1rem;
+  padding: 1rem;
+  background: #E8F5E9;
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--primary-color);
+}
+
+.navigation-info h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.navigation-info p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* Fix Leaflet container */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Override Leaflet popup styles */
+.leaflet-popup-content-wrapper {
+  border-radius: var(--border-radius);
+}
+
+.leaflet-popup-content {
+  margin: 0.75rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .legend-items {
+    grid-template-columns: 1fr;
+  }
+  
+  .view-toggle button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+}

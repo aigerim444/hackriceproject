@@ -1,0 +1,182 @@
+/* InteractiveLearning.css */
+.interactive-learning {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.language-toggle {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.language-toggle:hover {
+  background: #1B5E20;
+}
+
+/* Category Filters */
+.category-filters {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  background: white;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.category-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid #E0E0E0;
+  background: white;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.category-btn.active {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.category-btn:hover:not(.active) {
+  border-color: var(--primary-color);
+}
+
+/* Progress Overview */
+.progress-overview {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+  background: white;
+  margin: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+}
+
+.progress-stat {
+  text-align: center;
+}
+
+.progress-stat .stat-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.progress-stat .stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* Lessons List */
+.lessons-list {
+  padding: 1rem;
+}
+
+.lesson-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.lesson-card:hover:not(.locked) {
+  transform: translateX(5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.lesson-card.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.lesson-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  min-width: 50px;
+  text-align: center;
+}
+
+.lesson-content {
+  flex: 1;
+}
+
+.lesson-content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.lesson-content p {
+  margin: 0 0 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.lesson-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.points {
+  background: var(--secondary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Gamification Banner */
+.gamification-banner {
+  margin: 1rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #FFE0B2, #FFCC80);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+.gamification-banner h3 {
+  margin: 0 0 0.5rem 0;
+  color: #E65100;
+}
+
+.gamification-banner p {
+  margin: 0;
+  color: #BF360C;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .category-filters {
+    padding: 0.75rem;
+  }
+  
+  .lesson-card {
+    padding: 0.75rem;
+  }
+  
+  .lesson-icon {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+  }
+}
