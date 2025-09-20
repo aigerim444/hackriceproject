@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getTotalXP, getStreak, getLives, initializeLivesIfNeeded } from '../utils/xpManager';
+import BottomNavigation from '../components/BottomNavigation';
 import '../styles/Dashboard.css';
 
 interface DailyTask {
@@ -165,23 +166,7 @@ const Dashboard: React.FC = () => {
       </section>
 
       {/* Bottom Navigation */}
-      <nav className="bottom-nav">
-        <button className="nav-item active" onClick={() => navigate('/dashboard')}>
-          <span className="nav-icon">🏠</span>
-        </button>
-        <button className="nav-item" onClick={() => navigate('/map')}>
-          <span className="nav-icon">📍</span>
-        </button>
-        <button className="nav-item" onClick={() => navigate('/daily-report')}>
-          <span className="nav-icon">📋</span>
-        </button>
-        <button className="nav-item" onClick={() => navigate('/interactive-learning')}>
-          <span className="nav-icon">📚</span>
-        </button>
-        <button className="nav-item" onClick={() => navigate('/profile')}>
-          <span className="nav-icon">👤</span>
-        </button>
-      </nav>
+      <BottomNavigation />
     </div>
   );
 };

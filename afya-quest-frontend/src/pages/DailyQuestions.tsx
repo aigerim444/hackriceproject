@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { addXP, XP_REWARDS, getStreak, addLives, removeLives, getLives } from '../utils/xpManager';
+import { addXP, getStreak, addLives, removeLives, getLives, XP_REWARDS } from '../utils/xpManager';
+import BottomNavigation from '../components/BottomNavigation';
 import '../styles/DailyQuestions.css';
 
 interface Question {
@@ -244,6 +245,7 @@ const DailyQuestions: React.FC = () => {
           </div>
         )}
       </div>
+      <BottomNavigation />
     </div>
   );
 };
