@@ -33,7 +33,7 @@
 }
 
 .language-toggle:hover {
-  background: #1B5E20;
+  background: var(--info-color);
 }
 
 /* Modules Container */

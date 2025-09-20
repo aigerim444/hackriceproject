@@ -8,6 +8,7 @@ import DailyReport from './pages/DailyReport';
 import Itinerary from './pages/Itinerary';
 import InteractiveLearning from './pages/InteractiveLearning';
 import VideoModules from './pages/VideoModules';
+import ModuleQuiz from './pages/ModuleQuiz';
 import Profile from './pages/Profile';
 import MapView from './pages/MapView';
 import { initializeLivesIfNeeded } from './utils/xpManager';
@@ -52,6 +53,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/interactive-learning" element={<InteractiveLearning />} />
           <Route path="/video-modules" element={<VideoModules />} />
+          <Route path="/module-quiz/:moduleId" element={<ModuleQuiz />} />
           <Route path="/daily-questions" element={<DailyQuestions />} />
           <Route path="/map" element={<MapView />} />
           <Route path="/profile" element={<Profile />} />

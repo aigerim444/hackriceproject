@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/VideoModules.css';
 
@@ -12,23 +12,26 @@ interface Video {
   quizComplete: boolean;
   watched: boolean;
   description: string;
+  videoUrl?: string;
 }
 
 const VideoModules: React.FC = () => {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [videosWithQuizStatus, setVideosWithQuizStatus] = useState<Video[]>([]);
 
   const videos: Video[] = [
     {
       id: '1',
-      title: 'Module 1: Introduction to Community Health',
+      title: 'Module 1: Health Assessments',
       thumbnail: '🎬',
       duration: '12:30',
       category: 'basics',
       hasQuiz: true,
-      quizComplete: true,
+      quizComplete: false,
       watched: true,
-      description: 'Learn the fundamentals of community health work'
+      description: 'Learn how to conduct comprehensive health assessments using the Medical Detective\'s Handbook',
+      videoUrl: '/videos/Medical_Detective_s_Handbook.mp4'
     },
     {
       id: '2',
@@ -65,38 +68,61 @@ const VideoModules: React.FC = () => {
     },
     {
       id: '5',
-      title: 'Module 5: Disease Outbreak Response',
+      title: 'Module 5: Emergency First Aid',
       thumbnail: '🚨',
       duration: '22:30',
       category: 'emergency',
       hasQuiz: true,
       quizComplete: false,
-      watched: false,
-      description: 'How to respond during disease outbreaks'
+      watched: true,
+      description: 'Learn essential emergency first aid techniques for common medical situations',
+      videoUrl: '/videos/Emergency_First_Aid.mp4'
     }
   ];
 
+  useEffect(() => {
+    // Check localStorage for completed quizzes
+    const completedQuizzes = JSON.parse(localStorage.getItem('completedQuizzes') || '{}');
+    
+    const updatedVideos = videos.map(video => {
+      if (completedQuizzes[video.id]) {
+        return { ...video, quizComplete: true };
+      }
+      return video;
+    });
+    
+    setVideosWithQuizStatus(updatedVideos);
+  }, []);
+
   const categories = [
     { id: 'all', name: 'All Videos' },
-    { id: 'basics', name: 'Basics' },
+    { id: 'basics', name: 'Health Assessment' },
     { id: 'sanitation', name: 'Sanitation' },
     { id: 'maternal', name: 'Maternal Health' },
     { id: 'immunization', name: 'Immunization' },
     { id: 'emergency', name: 'Emergency' }
   ];
 
+  const displayVideos = videosWithQuizStatus.length > 0 ? videosWithQuizStatus : videos;
   const filteredVideos = selectedCategory === 'all'
-    ? videos
-    : videos.filter(video => video.category === selectedCategory);
+    ? displayVideos
+    : displayVideos.filter(video => video.category === selectedCategory);
 
   const handleVideoClick = (video: Video) => {
     console.log('Playing video:', video.id);
-    // In a real app, this would open a video player
+    if (video.videoUrl) {
+      // Open video in new tab or modal
+      window.open(video.videoUrl, '_blank');
+    } else {
+      // Fallback for videos without URLs
+      alert('Video URL not available');
+    }
   };
 
   const handleQuizClick = (video: Video) => {
     console.log('Starting quiz for:', video.id);
     // Navigate to quiz page
+    navigate(`/module-quiz/${video.id}`);
   };
 
   return (

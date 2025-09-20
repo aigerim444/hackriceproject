@@ -336,46 +336,299 @@ input:checked + .slider:before {
 
 /* Dark theme overrides for profile components */
 .dark-theme .profile-page {
-  background: var(--background);
+  background: #1a1a1a;
   color: var(--text-primary);
 }
 
 .dark-theme .profile-header {
-  background: var(--white);
-  border-bottom: 1px solid var(--border-color, #404040);
+  background: #2a2a2a;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .dark-theme .profile-info {
-  background: var(--white);
+  background: #2a2a2a;
+  border: 1px solid var(--border-color);
+}
+
+.dark-theme .avatar-placeholder {
+  background: linear-gradient(135deg, var(--primary-color), var(--info-color));
+}
+
+.dark-theme .level-badge {
+  background: var(--primary-color);
+  color: white;
+}
+
+.dark-theme .points-display {
+  color: var(--secondary-color);
 }
 
 .dark-theme .profile-tabs {
-  background: var(--white);
-  border-bottom: 1px solid var(--border-color, #404040);
+  background: #2a2a2a;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dark-theme .profile-tabs button {
+  color: var(--text-secondary);
+  background: transparent;
+}
+
+.dark-theme .profile-tabs button.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.dark-theme .profile-tabs button:hover:not(.active) {
+  color: var(--text-primary);
+  background: #333333;
 }
 
 .dark-theme .tab-content {
-  background: var(--white);
+  background: #2a2a2a;
+  border: 1px solid var(--border-color);
 }
 
-.dark-theme .setting-item select {
-  background: var(--background);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color, #404040);
+/* Overview Tab Dark Mode */
+.dark-theme .contact-info,
+.dark-theme .performance-stats {
+  background: transparent;
 }
 
 .dark-theme .info-item {
-  border-bottom: 1px solid var(--border-color, #404040);
+  border-bottom: 1px solid #3a3a3a;
+}
+
+.dark-theme .stat-card {
+  background: #333333;
+  border: 1px solid #404040;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.dark-theme .stat-value {
+  color: var(--primary-color);
+}
+
+.dark-theme .stat-label {
+  color: var(--text-secondary);
+}
+
+/* Achievements Tab Dark Mode */
+.dark-theme .achievement-card {
+  background: #333333;
+  border: 1px solid #404040;
+}
+
+.dark-theme .achievement-card:hover:not(.locked) {
+  background: #3a3a3a;
+}
+
+.dark-theme .achievement-card.locked {
+  opacity: 0.5;
+}
+
+/* Reports Tab Dark Mode */
+.dark-theme .reports-tab {
+  background: transparent;
 }
 
 .dark-theme .report-card {
-  background: var(--white);
+  background: #333333;
+  border: 1px solid #404040;
   border-left: 4px solid var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.dark-theme .report-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.dark-theme .report-header {
+  border-bottom: 1px solid #404040;
+}
+
+.dark-theme .report-header h4 {
+  color: var(--text-primary);
+}
+
+.dark-theme .report-details {
+  gap: 0.75rem;
+}
+
+.dark-theme .report-stat {
+  background: #3a3a3a;
+  border: 1px solid #444444;
+}
+
+.dark-theme .report-stat .stat-value {
+  color: var(--text-primary);
+}
+
+.dark-theme .report-stat .stat-label {
+  color: var(--text-secondary);
+}
+
+.dark-theme .report-extra {
+  border-top: 1px solid #404040;
+}
+
+.dark-theme .report-field strong {
+  color: var(--text-primary);
+}
+
+.dark-theme .report-field {
+  color: var(--text-secondary);
 }
 
 .dark-theme .no-reports {
-  background: var(--white);
-  border: 2px dashed var(--border-color, #404040);
+  background: #333333;
+  border: 2px dashed #4a4a4a;
+}
+
+.dark-theme .no-reports p {
+  color: var(--text-secondary);
+}
+
+.dark-theme .reports-actions {
+  border-top: 2px solid #404040;
+}
+
+/* Settings Tab Dark Mode */
+.dark-theme .setting-item {
+  background: #333333;
+  border: 1px solid #404040;
+}
+
+.dark-theme .setting-item:hover {
+  border-color: var(--primary-color);
+  background: #3a3a3a;
+}
+
+.dark-theme .setting-title {
+  color: var(--text-primary);
+}
+
+.dark-theme .setting-description {
+  color: var(--text-secondary);
+}
+
+.dark-theme .setting-item select {
+  background: #3a3a3a;
+  color: var(--text-primary);
+  border: 1px solid #4a4a4a;
+}
+
+.dark-theme .setting-item select:focus {
+  border-color: var(--primary-color);
+}
+
+/* Settings Actions Dark Mode */
+.dark-theme .btn-secondary {
+  background: transparent;
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.dark-theme .btn-secondary:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.dark-theme .btn-primary {
+  background: var(--primary-color);
+}
+
+.dark-theme .btn-primary:hover {
+  background: var(--info-color);
+}
+
+.dark-theme .btn-danger {
+  background: transparent;
+  color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+
+.dark-theme .btn-danger:hover {
+  background: var(--danger-color);
+  color: white;
+}
+
+/* Weekly Reflections Dark Mode */
+.dark-theme .weekly-reflection-form {
+  background: #333333;
+  border: 1px solid #404040;
+}
+
+.dark-theme .module-select {
+  background: #3a3a3a;
+  color: var(--text-primary);
+  border: 2px solid #4a4a4a;
+}
+
+.dark-theme .module-select:focus {
+  border-color: var(--primary-color);
+}
+
+.dark-theme .comments-textarea {
+  background: #3a3a3a;
+  color: var(--text-primary);
+  border: 2px solid #4a4a4a;
+}
+
+.dark-theme .comments-textarea:focus {
+  border-color: var(--primary-color);
+}
+
+.dark-theme .reflection-completed {
+  background: rgba(76, 175, 80, 0.1);
+  border: 2px solid var(--success-color);
+}
+
+.dark-theme .reflection-completed p {
+  color: var(--success-color);
+}
+
+.dark-theme .weekly-reflection-card {
+  background: #333333;
+  border: 1px solid #404040;
+  border-left: 4px solid var(--primary-color);
+}
+
+.dark-theme .weekly-reflection-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.dark-theme .reflection-header {
+  border-bottom: 1px solid #404040;
+}
+
+.dark-theme .reflection-date {
+  color: var(--primary-color);
+}
+
+.dark-theme .reflection-field strong {
+  color: var(--text-primary);
+}
+
+.dark-theme .reflection-field p {
+  color: var(--text-secondary);
+}
+
+.dark-theme .rating-display .star {
+  opacity: 0.3;
+}
+
+.dark-theme .rating-display .star.filled {
+  opacity: 1;
+}
+
+.dark-theme .no-reflections {
+  background: #333333;
+  border: 2px dashed #4a4a4a;
+}
+
+.dark-theme .no-reflections p {
+  color: var(--text-secondary);
 }
 
 /* Settings Actions */

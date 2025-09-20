@@ -9,6 +9,7 @@ import {
   availableModules,
   type WeeklyReflection
 } from '../utils/reflectionManager';
+import { useTheme } from '../contexts/ThemeContext';
 import BottomNavigation from '../components/BottomNavigation';
 import '../styles/Profile.css';
 
@@ -25,6 +26,7 @@ interface DailyReport {
 const Profile: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { isDarkMode, toggleDarkMode } = useTheme();
   const [activeTab, setActiveTab] = useState<'overview' | 'achievements' | 'reports' | 'settings' | 'weekly-reflections'>('overview');
   const [pastReports, setPastReports] = useState<DailyReport[]>([]);
   const [loading, setLoading] = useState(false);
@@ -394,28 +396,54 @@ const Profile: React.FC = () => {
             <h3>Settings</h3>
             <div className="settings-list">
               <div className="setting-item">
-                <span>Language Preference</span>
+                <div className="setting-info">
+                  <div className="setting-title">Dark Mode</div>
+                  <div className="setting-description">Switch between light and dark themes</div>
+                </div>
+                <label className="switch">
+                  <input 
+                    type="checkbox" 
+                    checked={isDarkMode}
+                    onChange={toggleDarkMode}
+                  />
+                  <span className="slider"></span>
+                </label>
+              </div>
+              <div className="setting-item">
+                <div className="setting-info">
+                  <div className="setting-title">Language Preference</div>
+                  <div className="setting-description">Choose your preferred language</div>
+                </div>
                 <select>
                   <option>English</option>
                   <option>Swahili</option>
                 </select>
               </div>
               <div className="setting-item">
-                <span>Notifications</span>
+                <div className="setting-info">
+                  <div className="setting-title">Notifications</div>
+                  <div className="setting-description">Receive alerts for important updates</div>
+                </div>
                 <label className="switch">
                   <input type="checkbox" defaultChecked />
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="setting-item">
-                <span>Offline Mode</span>
+                <div className="setting-info">
+                  <div className="setting-title">Offline Mode</div>
+                  <div className="setting-description">Download content for offline access</div>
+                </div>
                 <label className="switch">
                   <input type="checkbox" />
                   <span className="slider"></span>
                 </label>
               </div>
               <div className="setting-item">
-                <span>Daily Reminders</span>
+                <div className="setting-info">
+                  <div className="setting-title">Daily Reminders</div>
+                  <div className="setting-description">Get reminded to complete daily tasks</div>
+                </div>
                 <label className="switch">
                   <input type="checkbox" defaultChecked />
                   <span className="slider"></span>

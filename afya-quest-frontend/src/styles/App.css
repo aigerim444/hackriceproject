@@ -6,15 +6,16 @@
 }
 
 :root {
-  --primary-color: #2E7D32;
-  --secondary-color: #FFA726;
-  --success-color: #4CAF50;
-  --warning-color: #FF9800;
-  --danger-color: #F44336;
-  --info-color: #2196F3;
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  --background: #F5F5F5;
+  /* Teal/seafoam + sand palette */
+  --primary-color: #2C6E6A;      /* deep teal */
+  --secondary-color: #D1A780;    /* sand/tan accent */
+  --success-color: #3FA796;      /* teal-green success */
+  --warning-color: #D4A373;      /* warm sand warning */
+  --danger-color: #F44336;       /* unchanged */
+  --info-color: #5BB9B2;         /* seafoam */
+  --text-primary: #103B36;       /* dark teal text */
+  --text-secondary: #5F7D78;     /* muted teal-gray */
+  --background: #E8EFEE;         /* cool light background */
   --white: #FFFFFF;
   --border-radius: 8px;
   --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -22,14 +23,14 @@
 
 /* Dark theme variables */
 .dark-theme {
-  --primary-color: #4CAF50;
-  --secondary-color: #FFB74D;
-  --success-color: #66BB6A;
-  --warning-color: #FFA726;
+  --primary-color: #5BB9B2;      /* brighter teal for dark bg */
+  --secondary-color: #D1A780;    /* sand accent */
+  --success-color: #56C7BA;      /* teal-green */
+  --warning-color: #D4A373;      /* sand */
   --danger-color: #EF5350;
-  --info-color: #42A5F5;
-  --text-primary: #E0E0E0;
-  --text-secondary: #B0B0B0;
+  --info-color: #5BB9B2;         /* seafoam */
+  --text-primary: #DDE5E4;
+  --text-secondary: #A7B5B3;
   --background: #181818;
   --white: #2D2D2D;
   --border-radius: 8px;
@@ -38,24 +39,24 @@
   /* Additional dark theme colors */
   --card-background: #2D2D2D;
   --surface: #1E1E1E;
-  --border-color: #404040;
+  --border-color: #2E3C3A;       /* cool dark teal border */
 }
 
 /* Light theme (explicit) */
 .light-theme {
-  --primary-color: #2E7D32;
-  --secondary-color: #FFA726;
-  --success-color: #4CAF50;
-  --warning-color: #FF9800;
+  --primary-color: #2C6E6A;
+  --secondary-color: #D1A780;
+  --success-color: #3FA796;
+  --warning-color: #D4A373;
   --danger-color: #F44336;
-  --info-color: #2196F3;
-  --text-primary: #212121;
-  --text-secondary: #757575;
-  --background: #F5F5F5;
+  --info-color: #5BB9B2;
+  --text-primary: #103B36;
+  --text-secondary: #5F7D78;
+  --background: #E8EFEE;
   --white: #FFFFFF;
   --border-radius: 8px;
   --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  --border-color: #e0e0e0;
+  --border-color: #C9D7D5;
 }
 
 body {

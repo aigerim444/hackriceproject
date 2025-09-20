@@ -4,7 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #fda085 100%);
+background: linear-gradient(135deg, #2C6E6A 0%, #5BB9B2 35%, #8ED3CD 60%, #D1A780 85%, #F0E6DA 100%);
   background-size: 400% 400%;
   animation: gradientShift 8s ease infinite;
   display: flex;
@@ -293,13 +293,13 @@
 }
 
 .sound-button svg path {
-  stroke: #667eea;
+  stroke: var(--primary-color);
 }
 
 .sound-button span {
   font-size: 1rem;
   font-weight: 600;
-  color: #667eea;
+  color: var(--primary-color);
   letter-spacing: 0.5px;
 }
 

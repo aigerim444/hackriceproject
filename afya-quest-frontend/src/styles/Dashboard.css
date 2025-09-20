@@ -26,7 +26,7 @@
 }
 
 .stat-icon {
-  font-size: 1.2rem;
+  font-size: 1.8rem;
 }
 
 .stat-value {
@@ -63,13 +63,13 @@
   display: flex;
   align-items: center;
   background: var(--white);
-  padding: 1.5rem;
-  border-radius: 16px;
+  padding: 2rem;
+  border-radius: 20px;
   box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
-  min-height: 80px;
+  min-height: 140px;
 }
 
 .task-card:hover {
@@ -78,24 +78,24 @@
 }
 
 .task-icon-container {
-  width: 60px;
-  height: 60px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 1.25rem;
+  margin-right: 1.5rem;
   flex-shrink: 0;
   background: var(--background-light);
-  border-radius: 12px;
+  border-radius: 20px;
 }
 
 .task-icon {
-  font-size: 2.5rem;
+  font-size: 5rem;
 }
 
 .task-icon-img {
-  width: 32px;
-  height: 32px;
+  width: 80px;
+  height: 80px;
   object-fit: contain;
 }
 
