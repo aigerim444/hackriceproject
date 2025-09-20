@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { authAPI } from '../services/api';
 import '../styles/Login.css';
 
@@ -139,7 +139,7 @@ const Login: React.FC = () => {
         </form>
 
         <div className="login-footer">
-          <p>New CHA? <a href="#">Request access from your coordinator</a></p>
+          <p>New CHA? <Link to="/register">Create an account</Link> or <a href="#">request access from your coordinator</a></p>
         </div>
       </div>
     </div>

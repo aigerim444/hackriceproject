@@ -12,7 +12,7 @@ sleep 2
 # Start backend
 echo "🔧 Starting backend server..."
 cd afya-quest-backend
-npm run dev &
+PORT=8080 npm run dev &
 BACKEND_PID=$!
 echo "Backend started with PID: $BACKEND_PID"
 
@@ -21,7 +21,7 @@ sleep 3
 
 # Test if backend is running
 echo "🔍 Testing backend connection..."
-if curl -s http://localhost:5000/api/health > /dev/null; then
+if curl -s http://localhost:8080/api/health > /dev/null; then
     echo "✅ Backend is running!"
 else
     echo "❌ Backend failed to start"
@@ -31,14 +31,14 @@ fi
 # Start frontend
 echo "🎨 Starting frontend server..."
 cd ../afya-quest-frontend
-npm start &
+PORT=3001 npm start &
 FRONTEND_PID=$!
 echo "Frontend started with PID: $FRONTEND_PID"
 
 echo ""
 echo "🎉 Steve is ready!"
-echo "📱 Frontend: http://localhost:3000"
-echo "🔧 Backend: http://localhost:5000"
+echo "📱 Frontend: http://localhost:3001"
+echo "🔧 Backend: http://localhost:8080"
 echo "💬 Look for the chat button in the bottom-left corner"
 echo ""
 echo "Press Ctrl+C to stop both servers"
