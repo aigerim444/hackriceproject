@@ -180,6 +180,17 @@
   cursor: not-allowed;
 }
 
+.quiz-btn.coming-soon {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  cursor: not-allowed;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.quiz-btn.coming-soon:hover {
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+}
+
 /* Learning Path */
 .learning-path {
   margin: 1rem;
@@ -322,6 +333,16 @@
 .dark-theme .quiz-btn:hover:not(:disabled) {
   background: var(--primary-color);
   color: white;
+}
+
+.dark-theme .quiz-btn.coming-soon {
+  background: linear-gradient(135deg, #B8860B, #CD853F);
+  color: #ffffff;
+  opacity: 0.8;
+}
+
+.dark-theme .quiz-btn.coming-soon:hover {
+  background: linear-gradient(135deg, #B8860B, #CD853F);
 }
 
 .dark-theme .quiz-btn:disabled {

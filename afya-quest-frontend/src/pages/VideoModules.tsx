@@ -25,7 +25,7 @@ const VideoModules: React.FC = () => {
       id: '1',
       title: 'Module 1: Health Assessments',
       thumbnail: '🎬',
-      duration: '12:30',
+      duration: '6:50',
       category: 'basics',
       hasQuiz: true,
       quizComplete: false,
@@ -41,7 +41,7 @@ const VideoModules: React.FC = () => {
       category: 'sanitation',
       hasQuiz: true,
       quizComplete: false,
-      watched: true,
+      watched: false,
       description: 'Understanding water treatment and safe storage'
     },
     {
@@ -70,7 +70,7 @@ const VideoModules: React.FC = () => {
       id: '5',
       title: 'Module 5: Emergency First Aid',
       thumbnail: '🚨',
-      duration: '22:30',
+      duration: '7:21',
       category: 'emergency',
       hasQuiz: true,
       quizComplete: false,
@@ -179,11 +179,13 @@ const VideoModules: React.FC = () => {
                     <span className="quiz-status complete">✅ Quiz Complete</span>
                   ) : (
                     <button 
-                      className="quiz-btn"
-                      onClick={() => handleQuizClick(video)}
-                      disabled={!video.watched}
+                      className={`quiz-btn ${(video.id === '2' || video.id === '3' || video.id === '4') ? 'coming-soon' : ''}`}
+                      onClick={() => (video.id === '2' || video.id === '3' || video.id === '4') ? null : handleQuizClick(video)}
+                      disabled={!video.watched || video.id === '2' || video.id === '3' || video.id === '4'}
                     >
-                      {video.watched ? 'Take Quiz' : 'Watch Video First'}
+                      {(video.id === '2' || video.id === '3' || video.id === '4') 
+                        ? 'Coming Soon' 
+                        : (video.watched ? 'Take Quiz' : 'Watch Video First')}
                     </button>
                   )}
                 </div>
