@@ -17,6 +17,8 @@ code {
 html, body, #root {
   height: 100%;
   width: 100%;
+  background-color: var(--background);
+  transition: background-color 0.3s ease;
 }
 
 /* Scrollbar styles */
@@ -26,14 +28,27 @@ html, body, #root {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--text-secondary);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--text-primary);
+}
+
+/* Dark theme scrollbar overrides */
+.dark-theme ::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #666;
+}
+
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #888;
 }

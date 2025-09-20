@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { ThemeProvider } from './contexts/ThemeContext';
 import SplashScreen from './components/SplashScreen';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
@@ -15,15 +16,64 @@ import ChatWindow from './components/ChatWindow';
 import { initializeLivesIfNeeded } from './utils/xpManager';
 import './styles/App.css';
 
-function App() {
+// Component to handle chatbot visibility based on authentication
+function ChatbotWrapper() {
   const [isChatOpen, setIsChatOpen] = useState(false);
-  const [showSplash, setShowSplash] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation();
+  
+  // Check authentication status
   useEffect(() => {
-    // Clear any existing authentication tokens to ensure logged out state
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
-    sessionStorage.clear();
+    const checkAuth = () => {
+      const authToken = localStorage.getItem('authToken');
+      const user = localStorage.getItem('user');
+      
+      // User is authenticated if they have both token and user data, and are not on login page or root
+      const authenticated = !!(authToken && user && location.pathname !== '/login' && location.pathname !== '/');
+      setIsAuthenticated(authenticated);
+    };
     
+    checkAuth();
+    
+    // Listen for storage changes (when user logs in/out in another tab)
+    window.addEventListener('storage', checkAuth);
+    
+    return () => {
+      window.removeEventListener('storage', checkAuth);
+    };
+  }, [location.pathname]);
+
+  const handleChatToggle = () => {
+    setIsChatOpen(!isChatOpen);
+  };
+
+  const handleChatClose = () => {
+    setIsChatOpen(false);
+  };
+
+  // Only show Steve if user is authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return (
+    <>
+      <ChatButton 
+        isOpen={isChatOpen} 
+        onClick={handleChatToggle} 
+      />
+      <ChatWindow 
+        isOpen={isChatOpen} 
+        onClose={handleChatClose} 
+      />
+    </>
+  );
+}
+
+function AppContent() {
+  const [showSplash, setShowSplash] = useState(true);
+  
+  useEffect(() => {
     // Initialize lives on app start if needed
     initializeLivesIfNeeded();
     
@@ -34,14 +84,6 @@ function App() {
       document.body.classList.remove('has-bottom-nav');
     };
   }, []);
-
-  const handleChatToggle = () => {
-    setIsChatOpen(!isChatOpen);
-  };
-
-  const handleChatClose = () => {
-    setIsChatOpen(false);
-  };
   
   const handleSplashComplete = () => {
     setShowSplash(false);
@@ -67,17 +109,18 @@ function App() {
           <Route path="/itinerary" element={<Itinerary />} />
         </Routes>
 
-        {/* AI Chatbot */}
-        <ChatButton 
-          isOpen={isChatOpen} 
-          onClick={handleChatToggle} 
-        />
-        <ChatWindow 
-          isOpen={isChatOpen} 
-          onClose={handleChatClose} 
-        />
+        {/* Steve - AI Chatbot (only shows when logged in) */}
+        <ChatbotWrapper />
       </div>
     </Router>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
+    </ThemeProvider>
   );
 }
 

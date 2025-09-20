@@ -1,7 +1,7 @@
 /* InteractiveLearning.css - Modules Design */
 .modules-page {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: var(--background);
   padding-bottom: 80px;
 }
 
@@ -10,19 +10,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1.5rem;
-  background: white;
-  border-bottom: 1px solid #e0e0e0;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .modules-header h1 {
   margin: 0;
   font-size: 2rem;
   font-weight: bold;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .language-toggle {
-  background: var(--primary-color, #4CAF50);
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -56,7 +56,7 @@
   margin: 0;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .category-score {
@@ -73,7 +73,7 @@
 .score-text {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #666;
+  color: var(--text-secondary);
 }
 
 /* Module Row */
@@ -86,11 +86,12 @@
 .module-card {
   flex: 1;
   min-width: 200px;
-  background: #e8e8e8;
+  background: var(--white);
   border-radius: 16px;
   padding: 1.5rem;
   cursor: pointer;
   transition: transform 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
 .module-card:hover {
@@ -111,7 +112,7 @@
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
 }
 
 .module-progress {
@@ -128,7 +129,7 @@
 .progress-bar-container {
   flex: 1;
   height: 8px;
-  background: #ccc;
+  background: var(--border-color);
   border-radius: 4px;
   overflow: hidden;
 }
@@ -143,7 +144,7 @@
 .related-videos-card {
   flex: 1;
   min-width: 200px;
-  background: #e8e8e8;
+  background: var(--white);
   border-radius: 16px;
   padding: 1.5rem;
   cursor: pointer;
@@ -151,6 +152,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid var(--border-color);
 }
 
 .related-videos-card:hover {
@@ -165,7 +167,7 @@
   margin: 0 0 1rem 0;
   font-size: 1.1rem;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   text-decoration: underline;
   text-decoration-color: #007bff;
 }
@@ -178,13 +180,13 @@
   background: none;
   border: none;
   font-size: 1rem;
-  color: #666;
+  color: var(--text-secondary);
   cursor: pointer;
   text-decoration: underline;
 }
 
 .browse-btn:hover {
-  color: #333;
+  color: var(--text-primary);
 }
 
 .browse-arrow {
