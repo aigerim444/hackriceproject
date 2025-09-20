@@ -26,6 +26,7 @@ Compiling...
 Compiled successfully!
 webpack compiled successfully
 No issues found.
+<<<<<<< HEAD
 Compiling...
 Compiled with warnings.
 
@@ -667,3 +668,5 @@ src/pages/MapView.tsx
 
 webpack compiled with 1 warning
 No issues found.
+=======
+>>>>>>> parent of 5552a96 (login)

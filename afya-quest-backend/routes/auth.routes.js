@@ -162,12 +162,22 @@ router.put('/change-password', authMiddleware, async (req, res) => {
 
 // Test login without bcrypt (for debugging)
 router.post('/test-login', async (req, res) => {
+  console.log('Test login endpoint hit');
   try {
     const { email, password } = req.body;
     console.log('Test login for:', email);
     
-    // Find user by email
-    const user = await User.findOne({ email });
+    // Add timeout to prevent hanging
+    const timeoutPromise = new Promise((_, reject) => {
+      setTimeout(() => reject(new Error('Database query timeout')), 5000);
+    });
+    
+    // Find user with timeout
+    const userPromise = User.findOne({ email });
+    const user = await Promise.race([userPromise, timeoutPromise]);
+    
+    console.log('User query completed:', user ? 'found' : 'not found');
+    
     if (!user) {
       return res.status(401).json({ error: 'User not found' });
     }
@@ -180,16 +190,18 @@ router.post('/test-login', async (req, res) => {
     // Generate token
     const token = generateToken(user._id);
     
+    console.log('Sending response...');
     res.json({
       message: 'Test login successful',
       token,
       user: {
         id: user._id,
-        name: user.name,
+        name: user.name || 'Demo User',
         email: user.email,
-        role: user.role
+        role: user.role || 'cha'
       }
     });
+    console.log('Response sent successfully');
   } catch (error) {
     console.error('Test login error:', error);
     res.status(500).json({ error: error.message });
