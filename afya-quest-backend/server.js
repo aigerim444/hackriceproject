@@ -10,6 +10,7 @@ const lessonRoutes = require('./routes/lesson.routes');
 const videoRoutes = require('./routes/video.routes');
 const questionRoutes = require('./routes/question.routes');
 const progressRoutes = require('./routes/progress.routes');
+const chatRoutes = require('./routes/chat.routes');
 
 // Load environment variables
 dotenv.config();
@@ -39,6 +40,7 @@ app.use('/api/lessons', lessonRoutes);
 app.use('/api/videos', videoRoutes);
 app.use('/api/questions', questionRoutes);
 app.use('/api/progress', progressRoutes);
+app.use('/api/chat', chatRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {

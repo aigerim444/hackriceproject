@@ -631,3 +631,39 @@ src/pages/MapView.tsx
 
 webpack compiled with 1 warning
 No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 203:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 203:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 203:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/pages/MapView.tsx
+  Line 4:10:   'useNavigate' is defined but never used                                                                             @typescript-eslint/no-unused-vars
+  Line 203:6:  React Hook useEffect has a missing dependency: 'defaultPosition'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.

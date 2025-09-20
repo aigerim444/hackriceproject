@@ -20,6 +20,44 @@
   --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Dark theme variables */
+.dark-theme {
+  --primary-color: #4CAF50;
+  --secondary-color: #FFB74D;
+  --success-color: #66BB6A;
+  --warning-color: #FFA726;
+  --danger-color: #EF5350;
+  --info-color: #42A5F5;
+  --text-primary: #E0E0E0;
+  --text-secondary: #B0B0B0;
+  --background: #181818;
+  --white: #2D2D2D;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  
+  /* Additional dark theme colors */
+  --card-background: #2D2D2D;
+  --surface: #1E1E1E;
+  --border-color: #404040;
+}
+
+/* Light theme (explicit) */
+.light-theme {
+  --primary-color: #2E7D32;
+  --secondary-color: #FFA726;
+  --success-color: #4CAF50;
+  --warning-color: #FF9800;
+  --danger-color: #F44336;
+  --info-color: #2196F3;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --background: #F5F5F5;
+  --white: #FFFFFF;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  --border-color: #e0e0e0;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -28,6 +66,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--background);
   color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Ensure html also gets the background */
+html {
+  background-color: var(--background);
+  transition: background-color 0.3s ease;
 }
 
 .App {

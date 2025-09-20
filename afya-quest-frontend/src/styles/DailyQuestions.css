@@ -35,7 +35,7 @@
 /* Question Progress */
 .question-progress {
   padding: 1rem;
-  background: white;
+  background: var(--white);
   margin: 1rem;
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
@@ -50,7 +50,7 @@
 
 /* Question Card */
 .question-card {
-  background: white;
+  background: var(--white);
   margin: 1rem;
   padding: 1.5rem;
   border-radius: var(--border-radius);
@@ -100,9 +100,9 @@
   display: flex;
   align-items: center;
   padding: 1rem;
-  border: 2px solid #E0E0E0;
+  border: 2px solid var(--border-color);
   border-radius: var(--border-radius);
-  background: white;
+  background: var(--white);
   cursor: pointer;
   transition: all 0.3s;
   position: relative;
@@ -162,7 +162,7 @@
 .explanation-box {
   margin-top: 1.5rem;
   padding: 1rem;
-  background: #E3F2FD;
+  background: var(--background);
   border-left: 4px solid var(--info-color);
   border-radius: 4px;
 }

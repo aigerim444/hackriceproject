@@ -1,14 +1,16 @@
 /* MapView.css */
 .map-view {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: var(--background);
+  transition: background-color 0.3s ease;
   padding-bottom: 80px;
 }
 
 /* Search Container */
 .search-container {
   padding: 1rem;
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
 }
 
 .search-input-wrapper {
@@ -32,12 +34,13 @@
   border-radius: 25px;
   font-size: 1rem;
   background: #f8f9fa;
+  transition: background-color 0.3s ease;
   outline: none;
 }
 
 .search-input:focus {
   border-color: #2196F3;
-  background: white;
+  background: var(--white);
 }
 
 /* Filter Buttons */
@@ -45,7 +48,8 @@
   display: flex;
   gap: 0.5rem;
   padding: 1rem;
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
   border-bottom: 1px solid #eee;
 }
 
@@ -55,7 +59,7 @@
   gap: 0.5rem;
   padding: 0.75rem 1rem;
   border: 1px solid #ddd;
-  background: white;
+  background: var(--white);
   border-radius: 20px;
   font-size: 0.9rem;
   cursor: pointer;
@@ -66,6 +70,7 @@
 
 .filter-btn.active {
   background: #2196F3;
+  transition: background-color 0.3s ease;
   color: white;
   border-color: #2196F3;
 }
@@ -96,7 +101,7 @@
 .control-btn {
   width: 40px;
   height: 40px;
-  background: white;
+  background: var(--white);
   border: none;
   border-radius: 8px;
   display: flex;
@@ -116,11 +121,13 @@
 /* Custom marker styles */
 .custom-div-icon {
   background: transparent;
+  transition: background-color 0.3s ease;
   border: none;
 }
 
 .client-marker {
   background: transparent;
+  transition: background-color 0.3s ease;
   border: none;
 }
 
@@ -140,7 +147,7 @@
 .facility-popup .services {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
-  border-top: 1px solid #E0E0E0;
+  border-top: 1px solid var(--border-color);
 }
 
 .facility-popup .services strong {
@@ -187,7 +194,8 @@
 
 /* Client List */
 .client-list {
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
   border-top: 1px solid #eee;
 }
 
@@ -259,7 +267,8 @@
 
 /* Map Legend */
 .map-legend {
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
   padding: 1rem;
   border-top: 1px solid #eee;
 }

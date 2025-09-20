@@ -1,7 +1,8 @@
 /* Itinerary.css */
 .itinerary {
   min-height: 100vh;
-  background: #F8F9FA;
+  background: var(--background);
+  transition: background-color 0.3s ease;
   padding-bottom: 2rem;
 }
 
@@ -10,8 +11,9 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
-  background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  background: var(--white);
+  transition: background-color 0.3s ease;
+  box-shadow: var(--box-shadow);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -21,12 +23,13 @@
   flex: 1;
   text-align: center;
   font-size: 1.3rem;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0;
 }
 
 .map-view-btn {
   background: none;
+  transition: background-color 0.3s ease;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
@@ -36,19 +39,20 @@
 /* Date Section */
 .date-section {
   padding: 1.5rem 1rem;
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
   border-bottom: 1px solid #E5E7EB;
 }
 
 .date-section h3 {
   margin: 0 0 0.5rem 0;
-  color: #111827;
+  color: var(--text-primary);
   font-size: 1.1rem;
 }
 
 .summary {
   margin: 0;
-  color: #6B7280;
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 
@@ -86,6 +90,7 @@
   width: 2px;
   height: calc(100% + 1.5rem);
   background: #E5E7EB;
+  transition: background-color 0.3s ease;
   z-index: 1;
 }
 
@@ -93,9 +98,9 @@
 .location-card {
   margin-left: 2rem;
   flex: 1;
-  background: white;
+  background: var(--white);
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s;
@@ -113,8 +118,9 @@
 .location-time {
   padding: 0.5rem 1rem;
   background: #F3F4F6;
+  transition: background-color 0.3s ease;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-primary);
   font-size: 0.875rem;
 }
 
@@ -135,13 +141,13 @@
 
 .location-info h3 {
   margin: 0 0 0.25rem 0;
-  color: #111827;
+  color: var(--text-primary);
   font-size: 1rem;
 }
 
 .address {
   margin: 0;
-  color: #6B7280;
+  color: var(--text-secondary);
   font-size: 0.875rem;
 }
 
@@ -156,12 +162,13 @@
   align-items: center;
   gap: 0.25rem;
   font-size: 0.875rem;
-  color: #6B7280;
+  color: var(--text-secondary);
 }
 
 .location-notes {
   padding: 0.5rem;
   background: #FEF3C7;
+  transition: background-color 0.3s ease;
   border-radius: 6px;
   font-size: 0.875rem;
   color: #92400E;
@@ -180,7 +187,8 @@
   left: 0;
   right: 0;
   padding: 1rem;
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
   box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
 }
 
@@ -188,6 +196,7 @@
   width: 100%;
   padding: 1rem;
   background: #10B981;
+  transition: background-color 0.3s ease;
   color: white;
   border: none;
   border-radius: 8px;
@@ -207,6 +216,7 @@
   width: 100%;
   padding: 1rem;
   background: #3B82F6;
+  transition: background-color 0.3s ease;
   color: white;
   border: none;
   border-radius: 8px;
@@ -226,6 +236,7 @@
   width: 100%;
   padding: 1rem;
   background: #F0FDF4;
+  transition: background-color 0.3s ease;
   color: #10B981;
   border: 2px solid #10B981;
   border-radius: 8px;
@@ -238,14 +249,15 @@
 .itinerary-stats {
   margin: 2rem 1rem;
   padding: 1.5rem;
-  background: white;
+  background: var(--white);
+  transition: background-color 0.3s ease;
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .itinerary-stats h3 {
   margin: 0 0 1rem 0;
-  color: #111827;
+  color: var(--text-primary);
   font-size: 1.1rem;
 }
 
@@ -253,6 +265,7 @@
   width: 100%;
   height: 10px;
   background: #E5E7EB;
+  transition: background-color 0.3s ease;
   border-radius: 5px;
   overflow: hidden;
   margin-bottom: 0.5rem;
@@ -266,7 +279,7 @@
 
 .progress-text {
   text-align: center;
-  color: #6B7280;
+  color: var(--text-secondary);
   font-size: 0.875rem;
   margin: 0;
 }

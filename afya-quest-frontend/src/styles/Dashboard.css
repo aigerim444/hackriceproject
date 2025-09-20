@@ -1,9 +1,11 @@
 /* Dashboard.css - Mobile First Design */
 .dashboard {
-  background: #F8F9FA;
+  background: var(--background);
   min-height: 100vh;
   padding-bottom: 80px; /* Space for bottom nav */
   position: relative;
+  color: var(--text-primary);
+  transition: background-color 0.3s ease;
 }
 
 /* Stats Header */
@@ -12,8 +14,9 @@
   justify-content: space-around;
   align-items: center;
   padding: 1rem;
-  background: white;
-  border-bottom: 1px solid #E5E7EB;
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .stat-item {
@@ -29,11 +32,11 @@
 .stat-value {
   font-weight: 600;
   font-size: 1.1rem;
-  color: #374151;
+  color: var(--text-primary);
 }
 
 .stat-item.xp .stat-value {
-  color: #3B82F6;
+  color: var(--info-color);
 }
 
 /* Section Styles */
@@ -45,7 +48,7 @@
 .section-title {
   font-size: 1.3rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
@@ -59,10 +62,10 @@
 .task-card {
   display: flex;
   align-items: center;
-  background: white;
+  background: var(--white);
   padding: 1.5rem;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: all 0.2s;
   position: relative;
@@ -71,7 +74,7 @@
 
 .task-card:hover {
   transform: translateX(4px);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: var(--box-shadow);
 }
 
 .task-icon-container {
@@ -82,7 +85,7 @@
   justify-content: center;
   margin-right: 1.25rem;
   flex-shrink: 0;
-  background: #F3F4F6;
+  background: var(--background-light);
   border-radius: 12px;
 }
 
@@ -97,18 +100,18 @@
 .task-title {
   font-size: 1.1rem;
   font-weight: 600;
-  color: #111827;
+  color: var(--text-primary);
   margin: 0 0 0.5rem 0;
 }
 
 .required-indicator {
-  color: #EF4444;
+  color: var(--danger-color);
   font-size: 1.1rem;
 }
 
 .task-description {
   font-size: 0.9rem;
-  color: #6B7280;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.5;
 }
@@ -131,44 +134,7 @@
   font-weight: bold;
 }
 
-/* Bottom Navigation */
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 70px;
-  background: white;
-  border-top: 1px solid #E5E7EB;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 0 1rem;
-  z-index: 100;
-}
-
-.nav-item {
-  background: none;
-  border: none;
-  padding: 0.5rem;
-  cursor: pointer;
-  transition: all 0.2s;
-  opacity: 0.6;
-}
-
-.nav-item.active {
-  opacity: 1;
-}
-
-.nav-item:hover {
-  opacity: 1;
-  transform: scale(1.1);
-}
-
-.nav-icon {
-  font-size: 1.5rem;
-  display: block;
-}
+/* Bottom Navigation styles are in BottomNavigation.css */
 
 /* Mobile Responsive */
 @media (max-width: 480px) {

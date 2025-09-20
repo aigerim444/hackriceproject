@@ -236,6 +236,31 @@
   padding: 1rem;
   background: var(--background);
   border-radius: var(--border-radius);
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.setting-item:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.setting-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.setting-title {
+  color: var(--text-primary);
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.setting-description {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.3;
 }
 
 .setting-item span:first-child {
@@ -289,11 +314,68 @@
 }
 
 input:checked + .slider {
-  background-color: var(--success-color);
+  background-color: var(--primary-color);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primary-color);
 }
 
 input:checked + .slider:before {
   transform: translateX(26px);
+}
+
+/* Dark mode specific styles */
+.dark-theme .slider {
+  background-color: #555;
+}
+
+.dark-theme input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+/* Dark theme overrides for profile components */
+.dark-theme .profile-page {
+  background: var(--background);
+  color: var(--text-primary);
+}
+
+.dark-theme .profile-header {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color, #404040);
+}
+
+.dark-theme .profile-info {
+  background: var(--white);
+}
+
+.dark-theme .profile-tabs {
+  background: var(--white);
+  border-bottom: 1px solid var(--border-color, #404040);
+}
+
+.dark-theme .tab-content {
+  background: var(--white);
+}
+
+.dark-theme .setting-item select {
+  background: var(--background);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color, #404040);
+}
+
+.dark-theme .info-item {
+  border-bottom: 1px solid var(--border-color, #404040);
+}
+
+.dark-theme .report-card {
+  background: var(--white);
+  border-left: 4px solid var(--primary-color);
+}
+
+.dark-theme .no-reports {
+  background: var(--white);
+  border: 2px dashed var(--border-color, #404040);
 }
 
 /* Settings Actions */
