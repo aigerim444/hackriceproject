@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import SplashScreen from './components/SplashScreen';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import DailyQuestions from './pages/DailyQuestions';
@@ -13,16 +14,31 @@ import { initializeLivesIfNeeded } from './utils/xpManager';
 import './styles/App.css';
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
+  
   useEffect(() => {
+    // Clear any existing authentication tokens to ensure logged out state
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('user');
+    sessionStorage.clear();
+    
     // Initialize lives on app start if needed
     initializeLivesIfNeeded();
   }, []);
+  
+  const handleSplashComplete = () => {
+    setShowSplash(false);
+  };
+  
+  if (showSplash) {
+    return <SplashScreen onComplete={handleSplashComplete} />;
+  }
   
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/" element={<Navigate to="/login" replace />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/interactive-learning" element={<InteractiveLearning />} />
