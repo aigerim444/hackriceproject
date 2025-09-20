@@ -90,6 +90,12 @@
   font-size: 2rem;
 }
 
+.task-icon-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
 .task-content {
   flex: 1;
 }

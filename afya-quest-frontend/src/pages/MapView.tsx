@@ -44,7 +44,7 @@ const MapView: React.FC = () => {
   const [statusFilter, setStatusFilter] = useState<'all' | 'to-visit' | 'visited' | 'scheduled'>('all');
   const [mapReady, setMapReady] = useState(false);
   
-  // Default to Kajiado Airport coordinates (Kenya)
+  // Fixed location at Kajiado Airport, Kenya (no geolocation tracking)
   const defaultPosition: [number, number] = [-1.8581, 36.9823];
   
   const healthFacilities: HealthFacility[] = [
@@ -195,20 +195,8 @@ const MapView: React.FC = () => {
   ];
 
   useEffect(() => {
-    // Set default position first
+    // Set fixed position at Kajiado Airport
     setUserLocation(defaultPosition);
-    
-    // Then try to get user's actual location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation([position.coords.latitude, position.coords.longitude]);
-        },
-        (error) => {
-          console.log('Error getting location:', error);
-        }
-      );
-    }
     
     // Mark map as ready after a small delay
     setTimeout(() => setMapReady(true), 100);
@@ -292,7 +280,7 @@ const MapView: React.FC = () => {
             zoom={13}
             style={{ height: '500px', width: '100%' }}
             scrollWheelZoom={true}
-            zoomControl={true}
+            zoomControl={false}
             attributionControl={true}
             doubleClickZoom={true}
             dragging={true}
@@ -366,12 +354,6 @@ const MapView: React.FC = () => {
           ))}
           </MapContainer>
         )}
-        
-        {/* Map Controls */}
-        <div className="map-controls">
-          <button className="control-btn layers-btn">📐</button>
-          <button className="control-btn location-btn">📍</button>
-        </div>
       </div>
 
       {/* Map Legend */}
