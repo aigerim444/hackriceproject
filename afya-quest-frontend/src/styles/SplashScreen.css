@@ -45,6 +45,9 @@ background: linear-gradient(135deg, #2C6E6A 0%, #5BB9B2 35%, #8ED3CD 60%, #D1A78
   position: relative;
   width: 120px;
   height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .logo {
@@ -87,14 +90,14 @@ background: linear-gradient(135deg, #2C6E6A 0%, #5BB9B2 35%, #8ED3CD 60%, #D1A78
 
 .pulse-ring {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
   width: 120px;
   height: 120px;
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.5);
   animation: pulse 3s ease-out infinite;
+  transform-origin: center center;
 }
 
 .pulse-ring.delay-1 {
@@ -108,11 +111,11 @@ background: linear-gradient(135deg, #2C6E6A 0%, #5BB9B2 35%, #8ED3CD 60%, #D1A78
 @keyframes pulse {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    transform: scale(1);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(2);
+    transform: scale(2);
   }
 }
 
@@ -380,6 +383,9 @@ background: linear-gradient(135deg, #2C6E6A 0%, #5BB9B2 35%, #8ED3CD 60%, #D1A78
   .logo-container {
     width: 100px;
     height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   
   .logo svg {
