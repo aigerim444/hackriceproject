@@ -63,6 +63,8 @@ const Login: React.FC = () => {
         // Store token in localStorage
         localStorage.setItem('authToken', response.data.token);
         localStorage.setItem('user', JSON.stringify(response.data.user));
+        // Dispatch auth change event for chatbot
+        window.dispatchEvent(new CustomEvent('authChanged'));
         // Navigate to dashboard
         navigate('/dashboard');
       } catch (error: any) {

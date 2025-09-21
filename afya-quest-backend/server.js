@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 
+// Load environment variables FIRST
+dotenv.config();
+
 // Import routes
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
@@ -11,9 +14,6 @@ const videoRoutes = require('./routes/video.routes');
 const questionRoutes = require('./routes/question.routes');
 const progressRoutes = require('./routes/progress.routes');
 const chatRoutes = require('./routes/chat.routes');
-
-// Load environment variables
-dotenv.config();
 
 // Create Express app
 const app = express();

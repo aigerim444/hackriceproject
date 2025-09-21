@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
+import ChatbotWrapper from './components/ChatbotWrapper';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
@@ -62,6 +63,7 @@ function App() {
           <Route path="/daily-report" element={<DailyReport />} />
           <Route path="/itinerary" element={<Itinerary />} />
         </Routes>
+        <ChatbotWrapper />
       </div>
     </Router>
   );
