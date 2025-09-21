@@ -95,6 +95,10 @@ html {
   position: sticky;
   top: 0;
   z-index: 100;
+  /* Mobile safe area support */
+  padding-top: calc(1rem + env(safe-area-inset-top));
+  padding-left: calc(1rem + env(safe-area-inset-left));
+  padding-right: calc(1rem + env(safe-area-inset-right));
 }
 
 .page-header h1 {
