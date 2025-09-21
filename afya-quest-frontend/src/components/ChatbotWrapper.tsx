@@ -40,10 +40,15 @@ const ChatbotWrapper: React.FC = () => {
     setIsChatOpen(!isChatOpen);
   };
 
+  // Debug: Always show chatbot for now
+  console.log('ChatbotWrapper - isAuthenticated:', isAuthenticated, 'location:', location.pathname);
+  
+  // TEMPORARY: Always show chatbot for debugging
   // Don't render anything if not authenticated
-  if (!isAuthenticated) {
-    return null;
-  }
+  // if (!isAuthenticated) {
+  //   console.log('ChatbotWrapper - Not authenticated, not rendering');
+  //   return null;
+  // }
 
   return (
     <>
