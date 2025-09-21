@@ -2,7 +2,7 @@
 .daily-questions {
   min-height: 100vh;
   background: var(--background);
-  padding-bottom: 2rem;
+  padding-bottom: 100px; /* Increased space for bottom nav */
 }
 
 .header-stats {

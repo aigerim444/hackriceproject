@@ -2,7 +2,7 @@
 .dashboard {
   background: var(--background);
   min-height: 100vh;
-  padding-bottom: 80px; /* Space for bottom nav */
+  padding-bottom: 100px; /* Increased space for bottom nav */
   position: relative;
   color: var(--text-primary);
   transition: background-color 0.3s ease;
@@ -167,7 +167,7 @@
 
 @media (min-width: 768px) {
   .dashboard {
-    padding: 2rem;
+    padding: 2rem 2rem 100px 2rem; /* Keep bottom padding for nav spacing */
   }
   
   .features-grid {
