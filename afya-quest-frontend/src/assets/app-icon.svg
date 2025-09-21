@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle with gradient -->
+  <circle cx="256" cy="256" r="256" fill="url(#gradient)"/>
+  
+  <!-- Heart/Health Symbol -->
+  <path 
+    d="M256 426C256 426 86 298 86 192C86 136 120 86 171 86C205 86 235 102 256 128C277 102 307 86 341 86C392 86 426 136 426 192C426 298 256 426 256 426Z" 
+    fill="#FFFFFF"
+  />
+  
+  <!-- Plus Symbol -->
+  <rect x="222" y="171" width="68" height="170" rx="8" fill="#FF6B6B"/>
+  <rect x="171" y="222" width="170" height="68" rx="8" fill="#FF6B6B"/>
+  
+  <!-- Gradient definitions -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2C6E6A;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#5BB9B2;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#8ED3CD;stop-opacity:1" />
+      <stop offset="85%" style="stop-color:#D1A780;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F0E6DA;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
