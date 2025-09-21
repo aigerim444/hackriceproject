@@ -2,6 +2,7 @@
 .profile-page {
   min-height: 100vh;
   background: var(--background);
+  padding-bottom: 100px; /* Space for bottom nav */
 }
 
 .profile-header {
