@@ -9,11 +9,25 @@ const ChatbotWrapper: React.FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Check authentication status
+    // Check authentication status and allowed routes
     const checkAuth = () => {
       const authToken = localStorage.getItem('authToken');
       const user = localStorage.getItem('user');
-      const authenticated = !!(authToken && user && location.pathname !== '/login');
+      const isLoggedIn = !!(authToken && user);
+      
+      // Define allowed routes where chatbot should appear
+      const allowedRoutes = [
+        '/video-modules',
+        '/interactive-learning',
+        '/module-quiz' // This will match /module-quiz/:moduleId
+      ];
+      
+      // Check if current path is allowed
+      const isAllowedRoute = allowedRoutes.some(route => 
+        location.pathname.startsWith(route)
+      );
+      
+      const authenticated = isLoggedIn && isAllowedRoute;
       setIsAuthenticated(authenticated);
     };
 
@@ -40,15 +54,10 @@ const ChatbotWrapper: React.FC = () => {
     setIsChatOpen(!isChatOpen);
   };
 
-  // Debug: Always show chatbot for now
-  console.log('ChatbotWrapper - isAuthenticated:', isAuthenticated, 'location:', location.pathname);
-  
-  // TEMPORARY: Always show chatbot for debugging
-  // Don't render anything if not authenticated
-  // if (!isAuthenticated) {
-  //   console.log('ChatbotWrapper - Not authenticated, not rendering');
-  //   return null;
-  // }
+  // Don't render anything if not authenticated or not on allowed route
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <>
