@@ -1,14 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const { GoogleGenerativeAI } = require('@google/generative-ai');
+const OpenAI = require('openai');
 const authMiddleware = require('../middleware/auth.middleware');
 
-// Initialize Google Gemini AI
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: process.env.GEMINI_MODEL || 'gemini-1.5-flash' });
+// Initialize OpenAI (lazy initialization)
+let openai = null;
+function getOpenAI() {
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openai;
+}
 
-// Generate response using Google Gemini AI - Steve the Health Assistant
-async function generateGeminiResponse(message, conversationHistory = []) {
+// Generate response using OpenAI - Steve the Health Assistant
+async function generateOpenAIResponse(message, conversationHistory = []) {
   const systemPrompt = `You are Steve, a friendly and knowledgeable AI health assistant for Afya Quest, a gamified learning platform for Community Health Assistants (CHAs). 
   
   Your personality:
@@ -33,21 +40,27 @@ async function generateGeminiResponse(message, conversationHistory = []) {
   - Keep responses concise and engaging (under 500 characters when possible)
   - Be supportive of their learning journey`;
 
-  // Build conversation context
-  const conversationContext = conversationHistory
-    .slice(-5) // Keep last 5 messages for context
-    .map(msg => `${msg.role === 'user' ? 'User' : 'Steve'}: ${msg.content}`)
-    .join('\n');
+  // Build conversation messages for OpenAI
+  const messages = [
+    { role: 'system', content: systemPrompt },
+    ...conversationHistory.slice(-5), // Keep last 5 messages for context
+    { role: 'user', content: message }
+  ];
 
-  const fullPrompt = `${systemPrompt}
+  try {
+    const openaiClient = getOpenAI();
+    const completion = await openaiClient.chat.completions.create({
+      model: process.env.OPENAI_MODEL || 'gpt-3.5-turbo',
+      messages: messages,
+      max_tokens: 500,
+      temperature: 0.7,
+    });
 
-${conversationContext ? `Previous conversation:\n${conversationContext}\n\n` : ''}Current user message: ${message}
-
-Please provide a helpful response as Steve:`;
-
-  const result = await model.generateContent(fullPrompt);
-  const response = await result.response;
-  return response.text();
+    return completion.choices[0].message.content;
+  } catch (error) {
+    console.error('OpenAI API error:', error);
+    throw new Error('Failed to generate response from AI');
+  }
 }
 
 // Chat endpoint
@@ -59,37 +72,37 @@ router.post('/message', authMiddleware, async (req, res) => {
       return res.status(400).json({ error: 'Message is required' });
     }
 
-    if (!process.env.GEMINI_API_KEY) {
+    if (!process.env.OPENAI_API_KEY) {
       return res.status(500).json({ 
-        error: 'Gemini API key not configured. Please set GEMINI_API_KEY in environment variables.' 
+        error: 'OpenAI API key not configured. Please set OPENAI_API_KEY in environment variables.' 
       });
     }
 
-    // Generate AI response using Gemini
-    const aiResponse = await generateGeminiResponse(message, conversationHistory);
+    // Generate AI response using OpenAI
+    const aiResponse = await generateOpenAIResponse(message, conversationHistory);
 
     res.json({
       success: true,
       response: aiResponse,
-      provider: 'gemini',
+      provider: 'openai',
       timestamp: new Date().toISOString()
     });
 
   } catch (error) {
-    console.error('Gemini AI error:', error);
+    console.error('OpenAI API error:', error);
     
-    // Handle Gemini-specific errors
-    if (error.message?.includes('API_KEY_INVALID')) {
+    // Handle OpenAI-specific errors
+    if (error.message?.includes('API key') || error.message?.includes('authentication')) {
       return res.status(500).json({ 
-        error: 'Invalid Gemini API key. Please check your configuration.' 
+        error: 'Invalid OpenAI API key. Please check your configuration.' 
       });
-    } else if (error.message?.includes('QUOTA_EXCEEDED')) {
+    } else if (error.message?.includes('quota') || error.message?.includes('rate limit')) {
       return res.status(429).json({ 
-        error: 'Gemini API quota exceeded. Please try again later.' 
+        error: 'OpenAI API quota exceeded. Please try again later.' 
       });
-    } else if (error.message?.includes('SAFETY')) {
+    } else if (error.message?.includes('content filter')) {
       return res.status(400).json({ 
-        error: 'Message blocked by safety filters. Please rephrase your question.' 
+        error: 'Message blocked by content filters. Please rephrase your question.' 
       });
     }
     
